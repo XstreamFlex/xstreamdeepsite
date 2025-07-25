@@ -67,18 +67,19 @@
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+ <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <a href="/" class="text-2xl font-bold gradient-text">Xstream Flex</a>
+                        <span class="text-2xl font-bold gradient-text">Xstream Flex</span>
                     </div>
+                    <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
                             <a href="index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
-                            <a href="index.html#blog" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="#index.html#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
+                            <a href="blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="#privacy" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Privacy Policy</a>
                         </div>
                     </div>
                 </div>
@@ -103,20 +104,20 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="/#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
-                <a href="/blog" class="text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="/#legal" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
+                <a href="index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Privacy Policy</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
-                    <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                    <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
                         Get Started
                     </a>
                 </div>
             </div>
         </div>
-    </nav>
+    </nav>   
 
     <!-- Blog Header -->
     <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
