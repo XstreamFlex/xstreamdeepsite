@@ -8,41 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #000;
             color: #fff;
         }
-        
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
         .rocket-animation {
             animation: float 3s ease-in-out infinite;
         }
-        
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-        
         .package-card {
             transition: all 0.3s ease;
             border: 1px solid #333;
         }
-        
         .package-card:hover {
             transform: translateY(-5px);
             border-color: #00ff00;
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
         }
-        
         .feature-icon {
             width: 24px;
             height: 24px;
@@ -68,7 +61,7 @@
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="#home" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
                             <a href="#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
-                            <a href="#blog" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                             <a href="#legal" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
                         </div>
                     </div>
@@ -90,13 +83,13 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" class="text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
-                <a href="#blog" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
                 <a href="#legal" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
@@ -344,7 +337,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-3">The Launch Speed Advantage</h3>
                         <p class="text-gray-400 mb-4">Most creators get stuck in "perfect mode" - endlessly tweaking their course or product before launch. But speed to market is your greatest competitive advantage.</p>
-                        <a href="#" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        <a href="blog.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                             Read More <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -357,7 +350,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-3">Tool Fatigue is Real</h3>
                         <p class="text-gray-400 mb-4">The average creator tries 7 different platforms before finding one that works. Xstream Flex combines everything you need in one place, eliminating the integration headache.</p>
-                        <a href="#" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        <a href="blog.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                             Read More <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -404,16 +397,16 @@
                 <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
                     <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
                 <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
                     <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -452,7 +445,7 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-        
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -474,12 +467,12 @@
                 }
             });
         });
-        
+
         // Add animation to package cards on scroll
         const observerOptions = {
             threshold: 0.1
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -487,7 +480,7 @@
                 }
             });
         }, observerOptions);
-        
+
         document.querySelectorAll('.package-card').forEach(card => {
             observer.observe(card);
         });
