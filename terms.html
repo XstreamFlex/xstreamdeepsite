@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use | Xstream Flex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .rocket-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .highlight {
+            background: linear-gradient(90deg, rgba(0,255,0,0.1), rgba(0,255,0,0.05));
+            border-left: 3px solid #00ff00;
+        }
+        .toc-link {
+            transition: all 0.3s ease;
+        }
+        .toc-link:hover {
+            color: #00ff00;
+            transform: translateX(5px);
+        }
+        .section-number {
+            color: #00ff00;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="text-2xl font-bold gradient-text">Xstream Flex</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="/" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="/#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="/#blog" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="/#blog" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="#legal" class="text-green-400 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="gradient-text">Terms of Use</span>
+            </h1>
+            <p class="text-lg text-gray-300">
+                Please read these terms carefully before using Xstream Flex services
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Table of Contents -->
+            <aside class="lg:col-span-1">
+                <div class="sticky top-24 bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">Quick Navigation</h3>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#acceptance" class="toc-link block text-gray-300">1. Acceptance of Terms</a>
+                        <a href="#services" class="toc-link block text-gray-300">2. Services Description</a>
+                        <a href="#accounts" class="toc-link block text-gray-300">3. User Accounts</a>
+                        <a href="#payment" class="toc-link block text-gray-300">4. Payment Terms</a>
+                        <a href="#intellectual" class="toc-link block text-gray-300">5. Intellectual Property</a>
+                        <a href="#prohibited" class="toc-link block text-gray-300">6. Prohibited Activities</a>
+                        <a href="#termination" class="toc-link block text-gray-300">7. Termination</a>
+                        <a href="#disclaimer" class="toc-link block text-gray-300">8. Disclaimer</a>
+                        <a href="#liability" class="toc-link block text-gray-300">9. Limitation of Liability</a>
+                        <a href="#changes" class="toc-link block text-gray-300">10. Changes to Terms</a>
+                        <a href="#contact" class="toc-link block text-gray-300">11. Contact Us</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Terms Content -->
+            <article class="lg:col-span-3 space-y-12">
+                <section id="acceptance" class="highlight p-6 rounded-lg">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">1.</span> Acceptance of Terms</h2>
+                    <p class="text-gray-300 mb-4">
+                        By accessing and using Xstream Flex's digital web development subscription services ("Services"), you agree to be bound by these Terms of Use ("Terms"). If you do not agree to these Terms, please do not use our Services.
+                    </p>
+                    <p class="text-gray-300">
+                        These Terms apply to all visitors, users, and subscribers who access or use our platform at <strong class="text-green-400">xstreamflex.com</strong> and any associated subdomains.
+                    </p>
+                </section>
+
+                <section id="services">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">2.</span> Services Description</h2>
+                    <p class="text-gray-300 mb-4">
+                        Xstream Flex provides the following subscription-based services:
+                    </p>
+                    <ul class="space-y-2 text-gray-300 list-disc list-inside">
+                        <li>Website development and hosting</li>
+                        <li>Course builder platform access</li>
+                        <li>Payment processing integration</li>
+                        <li>Email marketing tools</li>
+                        <li>Technical support and maintenance</li>
+                        <li>Template and design resources</li>
+                    </ul>
+                </section>
+
+                <section id="accounts">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">3.</span> User Accounts</h2>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">3.1 Account Registration</h3>
+                    <p class="text-gray-300 mb-4">
+                        To access certain features of our Services, you must create an account. You agree to provide accurate, current, and complete information during registration.
+                    </p>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">3.2 Account Security</h3>
+                    <p class="text-gray-300">
+                        You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. Notify us immediately of any unauthorized use or security breach.
+                    </p>
+                </section>
+
+                <section id="payment">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">4.</span> Payment Terms</h2>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">4.1 Subscription Plans</h3>
+                    <p class="text-gray-300 mb-4">
+                        We offer two main service packages:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-gray-900 p-4 rounded border border-gray-800">
+                            <h4 class="font-bold text-green-400">Starter Launch - $500</h4>
+                            <p class="text-sm text-gray-300">One-time payment with full platform access</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded border border-gray-800">
+                            <h4 class="font-bold text-green-400">Turn Key Custom - $1000</h4>
+                            <p class="text-sm text-gray-300">One-time payment with full setup service</p>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">4.2 Refund Policy</h3>
+                    <p class="text-gray-300">
+                        We offer a 14-day money-back guarantee from the date of purchase. Refunds will be processed within 5-7 business days.
+                    </p>
+                </section>
+
+                <section id="intellectual">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">5.</span> Intellectual Property</h2>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">5.1 Your Content</h3>
+                    <p class="text-gray-300 mb-4">
+                        You retain all rights to your content, including courses, materials, and data uploaded to our platform. By using our Services, you grant us a limited license to host and display your content solely for providing the Services.
+                    </p>
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">5.2 Xstream Flex IP</h3>
+                    <p class="text-gray-300">
+                        All Xstream Flex trademarks, service marks, logos, and content are our exclusive property. You may not use our intellectual property without express written permission.
+                    </p>
+                </section>
+
+                <section id="prohibited">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">6.</span> Prohibited Activities</h2>
+                    <p class="text-gray-300 mb-4">
+                        You agree not to engage in any of the following activities:
+                    </p>
+                    <ul class="space-y-2 text-gray-300 list-disc list-inside">
+                        <li>Violating any applicable laws or regulations</li>
+                        <li>Infringing on intellectual property rights</li>
+                        <li>Uploading malicious code or harmful content</li>
+                        <li>Interfering with service operations</li>
+                        <li>Using automated systems without authorization</li>
+                        <li>Engaging in fraudulent activities</li>
+                    </ul>
+                </section>
+
+                <section id="termination">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">7.</span> Termination</h2>
+                    <p class="text-gray-300">
+                        We may terminate or suspend your account and access to Services at any time, with or without cause, with or without notice. Upon termination, your right to use the Services will immediately cease.
+                    </p>
+                </section>
+
+                <section id="disclaimer">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">8.</span> Disclaimer</h2>
+                    <p class="text-gray-300">
+                        The Services are provided "as is" and "as available" without warranties of any kind. We do not guarantee that the Services will be uninterrupted, secure, or error-free.
+                    </p>
+                </section>
+
+                <section id="liability">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">9.</span> Limitation of Liability</h2>
+                    <p class="text-gray-300">
+                        To the maximum extent permitted by law, Xstream Flex shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Services.
+                    </p>
+                </section>
+
+                <section id="changes">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">10.</span> Changes to Terms</h2>
+                    <p class="text-gray-300">
+                        We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting. Your continued use of the Services after changes constitutes acceptance of the updated Terms.
+                    </p>
+                </section>
+
+                <section id="contact" class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h2 class="text-2xl font-bold mb-4"><span class="section-number">11.</span> Contact Us</h2>
+                    <p class="text-gray-300 mb-4">
+                        If you have any questions about these Terms, please contact us:
+                    </p>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-envelope text-green-400 mr-2"></i>Email: <a href="mailto:legal@xstreamflex.com" class="text-green-400 hover:text-green-300">legal@xstreamflex.com</a></p>
+                        <p><i class="fas fa-phone text-green-400 mr-2"></i>Phone: <span class="text-green-400">+1 (555) 123-XFLEX</span></p>
+                        <p><i class="fas fa-map-marker-alt text-green-400 mr-2"></i>Address: 123 Launch St, Startup City, CA 94105</p>
+                    </div>
+                </section>
+
+                <div class="mt-12 text-center">
+                    <p class="text-sm text-gray-500">
+                        Last updated: December 1, 2023
+                    </p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-800 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:order-2 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400">&copy; 2023 Xstream Flex. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    document.getElementById('mobile-menu')?.classList.add('hidden');
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    tocLinks.forEach(link => link.classList.remove('text-green-400'));
+                    const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
+                    if (activeLink) activeLink.classList.add('text-green-400');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
