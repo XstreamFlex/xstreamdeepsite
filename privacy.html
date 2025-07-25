@@ -270,20 +270,11 @@
             <section class="privacy-section mb-12">
                 <h2 class="text-2xl font-bold mb-4 gradient-text">6. Your Rights & Choices</h2>
                 <p class="text-gray-300 leading-relaxed">
-                    Under GDPR and CCPA, you have the right to:
+                    Under GDPR and CCPA, you have the right to: Recieve a copy of your data or have it removed.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 text-center">
-                        <i class="fas fa-download text-green-500 text-2xl mb-2"></i>
-                        <h4 class="font-semibold text-white">Data Portability</h4>
-                        <button class="mt-2 bg-green-500 text-black px-3 py-1 rounded text-sm hover:bg-green-600">Download My Data</button>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 text-center">
-                        <i class="fas fa-eraser text-green-500 text-2xl mb-2"></i>
-                        <h4 class="font-semibold text-white">Right to be Forgotten</h4>
-                        <button class="mt-2 border border-green-500 text-green-500 px-3 py-1 rounded text-sm hover:bg-green-500 hover:text-black">Delete My Data</button>
-                    </div>
-                </div>
+                <p class="text-gray-300 leading-relaxed mt-4">
+                    To exercise any of these rights, please contact our support team at <a href="mailto:privacy@xstreamflex.com" class="text-green-400 hover:text-green-300">privacy@xstreamflex.com</a>. We'll process your request within 30 days in accordance with applicable regulations.
+                </p>
             </section>
 
             <!-- Cookies & Tracking -->
@@ -292,11 +283,6 @@
                 <p class="text-gray-300 leading-relaxed">
                     We use essential cookies for functionality and optional cookies for analytics. You can manage preferences in your browser settings.
                 </p>
-                <div class="mt-4">
-                    <button id="cookieSettingsBtn" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded transition">
-                        <i class="fas fa-cog mr-2"></i>Cookie Settings
-                    </button>
-                </div>
             </section>
 
             <!-- International Transfers -->
@@ -333,21 +319,6 @@
                 </div>
             </section>
 
-            <!-- Quick Actions -->
-            <section class="privacy-section">
-                <h2 class="text-2xl font-bold mb-4 gradient-text">Quick Actions</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <button class="bg-green-500 hover:bg-green-600 text-black px-4 py-3 rounded-md font-medium transition">
-                        <i class="fas fa-file-export mr-2"></i>Export Data
-                    </button>
-                    <button class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-black px-4 py-3 rounded-md font-medium transition">
-                        <i class="fas fa-ban mr-2"></i>Opt Out
-                    </button>
-                    <button class="border border-gray-500 text-gray-400 hover:border-gray-400 px-4 py-3 rounded-md font-medium transition">
-                        <i class="fas fa-question-circle mr-2"></i>Need Help?
-                    </button>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -402,11 +373,6 @@
             });
         }, { threshold: 0.1 });
         sections.forEach(section => observer.observe(section));
-
-        // Cookie settings modal (simplified)
-        document.getElementById('cookieSettingsBtn').addEventListener('click', () => {
-            alert('Cookie settings would open here. This is a demo implementation.');
-        });
 
         // Export/Delete buttons (demo)
         document.querySelectorAll('button').forEach(btn => {
