@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Your Course Right the First Time | Xstream Flex Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .rocket-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .blog-card {
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+        }
+        
+        .tag {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+        
+        .reading-progress {
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        .toc-link {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        
+        .toc-link:hover,
+        .toc-link.active {
+            border-left-color: #00ff00;
+            color: #00ff00;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
+            border-left: 4px solid #00ff00;
+        }
+        
+        .share-button {
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar"></div>
+    
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="text-2xl font-bold gradient-text">Xstream Flex</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="/" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="/#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="/blog" class="text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="/#legal" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="/blog" class="text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="/#legal" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-700">
+                <div class="flex items-center px-5">
+                    <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <nav class="text-sm mb-8">
+                <a href="/blog" class="text-green-500 hover:text-green-400">← Back to Blog</a>
+            </nav>
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-green-500 text-sm font-medium">Strategy</span>
+                <span class="text-gray-500 text-sm">4 min read</span>
+                <span class="text-gray-500 text-sm">Oct 28, 2023</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Price Your Course Right the First Time
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Most creators underprice their courses by 50-70%. Learn the psychology behind pricing and the exact formula to maximize revenue without losing customers.
+            </p>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-black"></i>
+                </div>
+                <div>
+                    <p class="font-medium">Marcus Chen</p>
+                    <p class="text-sm text-gray-400">Course Launch Strategist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <!-- Table of Contents -->
+                <aside class="hidden lg:block lg:col-span-3">
+                    <div class="sticky top-24">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Table of Contents</h3>
+                        <nav class="space-y-3">
+                            <a href="#psychology" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Psychology of Pricing</a>
+                            <a href="#formula" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The 3-Part Formula</a>
+                            <a href="#tactics" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Pricing Tactics That Work</a>
+                            <a href="#mistakes" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Common Mistakes</a>
+                            <a href="#case-study" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Real Case Study</a>
+                        </nav>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <article class="lg:col-span-9">
+                    <div class="prose prose-invert max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            When Sarah came to me with her $97 course, I asked her one question: "How did you come up with that price?" Her answer was the same one I hear 90% of the time: "It felt right."
+                        </p>
+
+                        <p class="mb-6">
+                            Here's the thing: your gut feeling is probably costing you thousands. After analyzing 500+ course launches, I've discovered that most creators underprice by 50-70% because they don't understand the psychology behind value perception.
+                        </p>
+
+                        <h2 id="psychology" class="text-3xl font-bold mb-4 mt-12">The Psychology of Pricing</h2>
+                        
+                        <p class="mb-6">
+                            Price isn't just a number—it's a signal of value, quality, and transformation. When someone sees a $97 course next to a $997 course, they automatically assume the higher-priced option delivers 10x the results.
+                        </p>
+
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">Key Insight</h3>
+                            <p class="text-gray-300">Students don't buy courses—they buy transformations. Price your course based on the value of the outcome, not the hours of content you provide.</p>
+                        </div>
+
+                        <h2 id="formula" class="text-3xl font-bold mb-4 mt-12">The 3-Part Pricing Formula</h2>
+
+                        <p class="mb-6">
+                            After testing dozens of pricing models, here's the formula that consistently maximizes revenue:
+                        </p>
+
+                        <ol class="list-decimal list-inside space-y-4 mb-8">
+                            <li><strong>Calculate the transformation value</strong> - What's the outcome worth to your student?</li>
+                            <li><strong>Determine your authority score</strong> - New creators start at 0.3, proven experts at 1.0</li>
+                            <li><strong>Apply the formula:</strong> Price = (Transformation Value × 0.1) × Authority Score</li>
+                        </ol>
+
+                        <p class="mb-6">
+                            Example: If your course helps someone land a $60k job, and you're a new creator: ($60,000 × 0.1) × 0.3 = $1,800. This might feel high, but it's actually fair for both parties.
+                        </p>
+
+                        <h2 id="tactics" class="text-3xl font-bold mb-4 mt-12">Pricing Tactics That Work</h2>
+
+                        <h3 class="text-2xl font-bold mb-3 mt-8">1. The Anchor Effect</h3>
+                        <p class="mb-6">
+                            Always present your premium option first. When students see a $2,000 option first, your $497 course feels like a bargain—even if it's the same price you originally planned.
+                        </p>
+
+                        <h3 class="text-2xl font-bold mb-3 mt-8">2. Payment Plans That Convert</h3>
+                        <p class="mb-6">
+                            Offer 3-6 month payment plans. They increase conversion by 23% while maintaining your full price. Never offer lifetime access for payment plans—students need skin in the game.
+                        </p>
+
+                        <h3 class="text-2xl font-bold mb-3 mt-8">3. The Decoy Effect</h3>
+                        <p class="mb-6">
+                            Create a middle tier that's intentionally less attractive. Most students will choose your premium option when they see the middle tier's poor value proposition.
+                        </p>
+
+                        <h2 id="mistakes" class="text-3xl font-bold mb-4 mt-12">Common Pricing Mistakes</h2>
+
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li><strong>Underpricing to get students:</strong> This signals low quality and attracts bargain hunters who won't take action</li>
+                            <li><strong>Over-discounting:</strong> Never offer more than 20% off your regular price</li>
+                            <li><strong>One-size-fits-all pricing:</strong> Always offer at least two tiers to capture different value perceptions</li>
+                            <li><strong>Ignoring payment processing fees:</strong> Factor 3-5% into your price</li>
+                        </ul>
+
+                        <h2 id="case-study" class="text-3xl font-bold mb-4 mt-12">Real Case Study: From $97 to $2,497</h2>
+
+                        <p class="mb-6">
+                            Meet David, a coding bootcamp graduate who created a Python course. Initially priced at $97, he had 150 students but was barely covering his costs.
+                        </p>
+
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">The Transformation</h3>
+                            <p class="text-gray-300 mb-3">After working together, we repositioned his course as a career transformation program:</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                <li>New price: $2,497 with payment plans</li>
+                                <li>Added career coaching component</li>
+                                <li>Created job placement partnerships</li>
+                                <li>Updated messaging to focus on salary outcomes</li>
+                            </ul>
+                        </div>
+
+                        <p class="mb-6">
+                            Result: 40 students at $2,497 = $99,880 (vs. $14,550 previously). More importantly, students were more committed and achieved better results.
+                        </p>
+
+                        <h2 class="text-3xl font-bold mb-4 mt-12">Your Next Steps</h2>
+
+                        <p class="mb-6">
+                            Don't wait for the "perfect" price. Start with the formula, test with a small group, and adjust based on feedback. Remember: it's easier to lower prices than raise them.
+                        </p>
+
+                        <div class="bg-gray-900 p-8 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-4">Quick Action Checklist</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 text-green-500">
+                                    <span class="text-gray-300">Calculate your course's transformation value</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 text-green-500">
+                                    <span class="text-gray-300">Apply the 3-part pricing formula</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 text-green-500">
+                                    <span class="text-gray-300">Create 2-3 pricing tiers</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3 text-green-500">
+                                    <span class="text-gray-300">Add payment plan options</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="border-t border-b border-gray-800 py-6 my-8">
+                        <p class="text-sm text-gray-400 mb-4">Found this helpful? Share it:</p>
+                        <div class="flex gap-3">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-twitter mr-2"></i>Tweet
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-link mr-2"></i>Copy Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Next Article -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Next Article</h3>
+                        <a href="/blog/essential-tech-stack" class="block bg-gray-900 p-6 rounded-lg hover:border-green-500 border border-transparent transition-all">
+                            <h4 class="text-lg font-bold mb-2">Essential Tech Stack for Course Creators</h4>
+                            <p class="text-gray-400">Don't build your course business on shaky ground. Here are the 7 tools you actually need...</p>
+                            <span class="text-sm text-green-500 mt-3 inline-block">Read next →</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
+            <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
+            <form class="max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Legal Links -->
+    <section id="legal" class="py-12 bg-black border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
+                    <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
+                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
+                    <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
+                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:order-2 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400">
+                        &copy; 2023 Xstream Flex. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Reading progress bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Table of contents active link
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('[id]');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Share buttons
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const url = window.location.href;
+                const title = document.querySelector('h1').textContent;
+                
+                if (this.querySelector('.fa-twitter')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-linkedin')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-link')) {
+                    navigator.clipboard.writeText(url);
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Smooth scrolling for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
