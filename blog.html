@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xstream Flex | Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .rocket-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .blog-card {
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+        }
+        
+        .tag {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .tag:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="text-2xl font-bold gradient-text">Xstream Flex</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="/" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="/#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="/blog" class="text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="/#legal" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="/" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="/blog" class="text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="/#legal" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-700">
+                <div class="flex items-center px-5">
+                    <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="gradient-text">Xstream Flex</span><br>
+                <span class="text-white">Blog</span>
+            </h1>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                Insights, strategies, and real stories to help you launch faster and smarter. No fluff, just actionable advice.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Filter Section -->
+    <section class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-gray-400 mr-4">Filter by:</span>
+                    <div class="inline-flex flex-wrap gap-2">
+                        <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="all">All</span>
+                        <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="strategy">Strategy</span>
+                        <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="tools">Tools</span>
+                        <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="case-study">Case Studies</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Search articles..." 
+                           class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 w-64">
+                    <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-20 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Post 1: The Launch Speed Advantage -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-rocket text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Strategy</span>
+                            <span class="text-gray-500 text-sm">3 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">The Launch Speed Advantage</h2>
+                        <p class="text-gray-400 mb-4">Most creators get stuck in "perfect mode" - endlessly tweaking their course or product before launch. But speed to market is your greatest competitive advantage...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Nov 15, 2023</span>
+                            <a href="#post-1" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2: Tool Fatigue is Real -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools">
+                    <div class="h-48 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-tools text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Tools</span>
+                            <span class="text-gray-500 text-sm">4 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">Tool Fatigue is Real</h2>
+                        <p class="text-gray-400 mb-4">The average creator tries 7 different platforms before finding one that works. Xstream Flex combines everything you need in one place, eliminating the integration headache...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Nov 12, 2023</span>
+                            <a href="#post-2" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3: First $10K -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="case-study">
+                    <div class="h-48 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Case Study</span>
+                            <span class="text-gray-500 text-sm">5 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">How Sarah Made $10K in 30 Days</h2>
+                        <p class="text-gray-400 mb-4">Sarah had never sold an online course before. Using Xstream Flex's Turn Key package, she went from idea to $10,000 in revenue in just 30 days. Here's exactly how...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Nov 8, 2023</span>
+                            <a href="#post-3" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4: Email Sequences -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                    <div class="h-48 bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-envelope text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Strategy</span>
+                            <span class="text-gray-500 text-sm">6 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">The 5-Email Sequence That Converts</h2>
+                        <p class="text-gray-400 mb-4">Stop overthinking your email marketing. This proven 5-email sequence has generated over $1M in course sales across different niches...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Nov 3, 2023</span>
+                            <a href="#post-4" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 5: Course Pricing -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-dollar-sign text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Strategy</span>
+                            <span class="text-gray-500 text-sm">4 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">Price Your Course Right the First Time</h2>
+                        <p class="text-gray-400 mb-4">Most creators underprice their courses by 50-70%. Learn the psychology behind pricing and the exact formula to maximize revenue...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Oct 28, 2023</span>
+                            <a href="#post-5" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 6: Tech Stack -->
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools">
+                    <div class="h-48 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-cogs text-6xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-green-500 text-sm font-medium">Tools</span>
+                            <span class="text-gray-500 text-sm">7 min read</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 leading-tight">Essential Tech Stack for Course Creators</h2>
+                        <p class="text-gray-400 mb-4">Don't build your course business on shaky ground. Here are the 7 tools you actually need (and the 15 you can ignore)...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-sm">Oct 20, 2023</span>
+                            <a href="#post-6" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                                Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-16">
+                <button id="load-more" class="border border-green-500 text-green-500 hover:bg-green-500 hover:text-black px-8 py-3 rounded-md font-medium transition duration-300">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
+            <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
+            <form class="max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Enter your email" 
+                       class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Legal Links -->
+    <section id="legal" class="py-12 bg-black border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
+                    <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
+                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
+                    <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
+                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center md:order-2 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+                <div class="mt-8 md:mt-0 md:order-1">
+                    <p class="text-center text-base text-gray-400">
+                        &copy; 2023 Xstream Flex. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Blog filtering
+        const tags = document.querySelectorAll('.tag');
+        const posts = document.querySelectorAll('.blog-card');
+        const searchInput = document.getElementById('search-input');
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Update active tag
+                tags.forEach(t => t.classList.remove('bg-green-500', 'text-black'));
+                tags.forEach(t => t.classList.add('bg-gray-800', 'text-white'));
+                this.classList.remove('bg-gray-800', 'text-white');
+                this.classList.add('bg-green-500', 'text-black');
+                
+                // Filter posts
+                posts.forEach(post => {
+                    if (filter === 'all' || post.getAttribute('data-category') === filter) {
+                        post.style.display = 'block';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            posts.forEach(post => {
+                const title = post.querySelector('h2').textContent.toLowerCase();
+                const content = post.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+
+        // Load more functionality (placeholder)
+        document.getElementById('load-more').addEventListener('click', function() {
+            this.textContent = 'Loading...';
+            setTimeout(() => {
+                this.textContent = 'Load More Articles';
+                alert('More articles coming soon! This is where you would dynamically load additional blog posts.');
+            }, 1000);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const menu = document.getElementById('mobile-menu');
+                    menu.classList.add('hidden');
+                    
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
