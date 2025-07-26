@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xstream Flex | Essential Tech Stack for Course Creators</title>
+    <title>Essential Tech Stack for Course Creators | Xstream Flex Blog</title>
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #000;
             color: #fff;
         }
+
+        /* ---------- Re-using styles from the first snippet ---------- */
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
@@ -23,8 +30,8 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
         .blog-card {
@@ -37,13 +44,8 @@
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
         }
         .feature-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 24px; height: 24px; background: #00ff00; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
             margin-right: 8px;
         }
         .tag {
@@ -54,11 +56,40 @@
             background-color: #00ff00;
             color: #000;
         }
+        .reading-progress {
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: width 0.3s ease;
+        }
+        .toc-link {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        .toc-link:hover, .toc-link.active {
+            border-left-color: #00ff00;
+            color: #00ff00;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
+            border-left: 4px solid #00ff00;
+        }
+        .share-button {
+            transition: all 0.3s ease;
+        }
+        .share-button:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+        }
     </style>
 </head>
+
 <body class="min-h-screen">
-    <!-- Navigation -->
- <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar"></div>
+
+    <!-- ---------- Navigation (same as first snippet) ---------- -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -67,26 +98,23 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
-                            <a href="blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="#privacy" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Privacy Policy</a>
+                            <a href="../index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="../blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="../index.html#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                        <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
                             Get Started
                         </a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -95,229 +123,221 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
-                <a href="blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Privacy Policy</a>
+                <a href="../index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="../blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="../index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
-                    <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                    <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
                         Get Started
                     </a>
                 </div>
             </div>
         </div>
-    </nav>   
-    
-    <!-- Article Hero -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+    </nav>
+
+    <!-- Article Header -->
+    <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
         <div class="max-w-4xl mx-auto">
-            <div class="mb-6">
-                <a href="/blog" class="text-green-500 hover:text-green-400 inline-flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to all articles
-                </a>
-            </div>
-            <div class="mb-4">
+            <nav class="text-sm mb-8">
+                <a href="../blog" class="text-green-500 hover:text-green-400">← Back to Blog</a>
+            </nav>
+            <div class="flex items-center gap-4 mb-6">
                 <span class="text-green-500 text-sm font-medium">Tools</span>
-                <span class="text-gray-500 text-sm mx-2">•</span>
-                <span class="text-gray-500 text-sm">Oct 20, 2023</span>
-                <span class="text-gray-500 text-sm mx-2">•</span>
                 <span class="text-gray-500 text-sm">7 min read</span>
+                <span class="text-gray-500 text-sm">Oct 20, 2023</span>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Essential Tech Stack for Course Creators</h1>
-            <p class="text-xl text-gray-300 max-w-3xl">Don't build your course business on shaky ground. Here are the 7 tools you actually need (and the 15 you can ignore).</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Essential Tech Stack for Course Creators
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Don't build your course business on shaky ground. Here are the 7 tools you actually need (and the 15 you can ignore).
+            </p>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&fit=crop&crop=face" 
+                     alt="Kim Deepsyt" 
+                     class="w-12 h-12 rounded-full object-cover">
+                <div>
+                    <p class="font-medium">Kim Deepsyt</p>
+                    <p class="text-sm text-gray-400">Course Launch Strategist</p>
+              </div>
         </div>
     </section>
 
     <!-- Article Content -->
-    <article class="py-16 px-4 sm:px-6 lg:px-8">
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
-            <div class="prose prose-invert prose-lg max-w-none">
-                <p class="text-xl leading-relaxed mb-8">You've seen the headlines: "Top 50 Tools Every Course Creator Needs!" or "The Ultimate List of 100+ SaaS Apps for Your Business". It's overwhelming and frankly, it's bullshit. Most of those lists are affiliate marketing disguised as advice.</p>
-
-                <p class="mb-6">After helping 300+ creators launch their courses, here's what I've learned: you need exactly 7 tools to build a six-figure course business. Everything else is just noise.</p>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">The Problem with "All-in-One" Platforms</h2>
-                <p class="mb-6">Before we dive into the stack, let's address the elephant in the room. Why not just use Teachable, Thinkific, or Kajabi?</p>
-                <ul class="list-disc list-inside mb-6 space-y-3">
-                    <li><strong>Vendor Lock-in:</strong> Once you're in, you're stuck. Migrating 1,000+ students is a nightmare.</li>
-                    <li><strong>Limited Customization:</strong> Want to add a simple quiz type? Good luck.</li>
-                    <li><strong>Revenue Share:</strong> That 10% transaction fee adds up fast. On a $10,000 launch, you're paying $1,000 just for processing.</li>
-                </ul>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">The 7-Tool Tech Stack That Actually Works</h2>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">1. Domain & DNS: Cloudflare ($0/mo)</h3>
-                    <p class="mb-3">Cloudflare's free plan gives you DNS management, SSL certificates, and basic CDN. It's the foundation everything else builds on.</p>
-                    <p class="text-gray-400 text-sm"><em>Pro tip: Set up your domain through Cloudflare Registrar for wholesale pricing (no markup).</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">2. Website Builder: Webflow ($29/mo)</h3>
-                    <p class="mb-3">Webflow gives you the design flexibility of custom code with the ease of a visual builder. Perfect for landing pages, sales pages, and your main site.</p>
-                    <p class="text-gray-400 text-sm"><em>Skip the CMS plan. You don't need dynamic content for a course site.</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">3. Course Platform: Podia ($39/mo)</h3>
-                    <p class="mb-3">Podia offers unlimited everything—courses, students, uploads—for one flat fee. No revenue sharing, no transaction fees.</p>
-                    <p class="text-gray-400 text-sm"><em>Alternative: Teachable at $39/mo if you prefer their interface, but you'll pay 5% transaction fees.</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">4. Email Marketing: ConvertKit ($29/mo)</h3>
-                    <p class="mb-3">ConvertKit's visual automations make it easy to create complex email sequences without a marketing degree.</p>
-                    <p class="text-gray-400 text-sm"><em>Start with the $29 plan. You can always upgrade when you hit 1,000 subscribers.</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">5. Payment Processing: Stripe (2.9% + 30¢)</h3>
-                    <p class="mb-3">Industry standard for online payments. Integrates with everything and handles all the compliance headaches.</p>
-                    <p class="text-gray-400 text-sm"><em>Set up webhooks for instant course access after purchase.</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">6. Analytics: Fathom Analytics ($14/mo)</h3>
-                    <p class="mb-3">Privacy-first analytics that don't slow down your site. See exactly where your sales are coming from without compromising user privacy.</p>
-                    <p class="text-gray-400 text-sm"><em>Google Analytics is free but will kill your page speed scores.</em></p>
-                </div>
-
-                <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-green-500">7. Community: Circle ($49/mo)</h3>
-                    <p class="mb-3">Circle combines the engagement of Facebook Groups with the control of your own platform. No algorithm, no distractions.</p>
-                    <p class="text-gray-400 text-sm"><em>Skip this initially. Start with a free Facebook Group and upgrade when you have 100+ students.</em></p>
-                </div>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">Total Monthly Cost: $160</h2>
-                <p class="mb-6">Compare that to Kajabi's $199/mo plan (which still charges 0% transaction fees), and you're saving $39/mo while getting more flexibility.</p>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">The 15 Tools You Can Ignore (At Least Initially)</h2>
-                <ul class="list-disc list-inside mb-6 space-y-2">
-                    <li>Webinar platforms (Zoom works fine)</li>
-                    <li>Affiliate software (manual tracking works for 20-50 affiliates)</li>
-                    <li>Survey tools (Google Forms is free)</li>
-                    <li>Calendar booking (Calendly's free tier is enough)</li>
-                    <li>Social media schedulers (manual posting is more authentic)</li>
-                    <li>SEO tools (Google Search Console is all you need)</li>
-                    <li>Heatmap software (overkill for most course sites)</li>
-                    <li>Membership plugins (Podia handles this)</li>
-                    <li>Video hosting (Vimeo/YouTube work fine)</li>
-                    <li>Design tools (Canva's free tier is sufficient)</li>
-                    <li>CRM systems (ConvertKit handles basic CRM)</li>
-                    <li>Help desk software (email works for < 500 students)</li>
-                    <li>Quiz builders (Podia has basic quizzes)</li>
-                    <li>Certificate generators (manual PDFs work)</li>
-                    <li>Mobile app builders (your students won't use them)</li>
-                </ul>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">Setting Up Your Stack: Day-by-Day Plan</h2>
-                <p class="mb-6">Here's exactly how to set everything up in one weekend:</p>
-
-                <h3 class="text-2xl font-bold mb-4">Day 1: Foundation (2 hours)</h3>
-                <ul class="list-disc list-inside mb-6 space-y-2">
-                    <li>Buy domain through Cloudflare</li>
-                    <li>Set up DNS records</li>
-                    <li>Create Webflow account and connect domain</li>
-                    <li>Basic Webflow template setup</li>
-                </ul>
-
-                <h3 class="text-2xl font-bold mb-4">Day 2: Course & Email (3 hours)</h3>
-                <ul class="list-disc list-inside mb-6 space-y-2">
-                    <li>Sign up for Podia and create your first course</li>
-                    <li>Set up ConvertKit and create opt-in form</li>
-                    <li>Connect Stripe to Podia</li>
-                    <li>Install Fathom Analytics tracking</li>
-                </ul>
-
-                <h3 class="text-2xl font-bold mb-4">Day 3: Test & Launch (1 hour)</h3>
-                <ul class="list-disc list-inside mb-6 space-y-2">
-                    <li>Test purchase flow end-to-end</li>
-                    <li>Send test email sequence</li>
-                    <li>Check analytics tracking</li>
-                    <li>Soft launch to 5 beta users</li>
-                </ul>
-
-                <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-6 my-12">
-                    <h3 class="text-xl font-bold mb-3 text-green-400">🚀 Ready to Launch Faster?</h3>
-                    <p class="text-gray-300">Xstream Flex's Turn Key package includes all these tools pre-configured. We handle the tech so you can focus on content and marketing.</p>
-                    <a href="/#packages" class="inline-flex items-center text-green-500 hover:text-green-400 font-medium mt-4">
-                        See what's included <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <h2 class="text-3xl font-bold mb-6 mt-12">When to Upgrade Your Stack</h2>
-                <p class="mb-6">Don't upgrade until you hit these milestones:</p>
-
-                <ul class="list-disc list-inside mb-6 space-y-3">
-                    <li><strong>Circle ($49/mo):</strong> When you have 100+ students and daily questions</li>
-                    <li><strong>Higher ConvertKit plan ($50/mo):</strong> When you hit 1,000 subscribers</li>
-                    <li><strong>Zapier ($19.99/mo):</strong> When you need to connect 3+ tools</li>
-                    <li><strong>Webflow CMS ($23/mo):</strong> When you want dynamic blog content</li>
-                    <li><strong>First employee:</strong> When you're making $10k+/month consistently</li>
-                </ul>
-
-                <p class="text-xl leading-relaxed mt-12">Remember: your tech stack won't make or break your course business. Your content, marketing, and student results will. Start simple, validate demand, then optimize.</p>
-            </div>
-
-            <!-- Author Box -->
-            <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mt-16">
-                <div class="flex items-center">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-black text-2xl"></i>
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <!-- Table of Contents -->
+                <aside class="hidden lg:block lg:col-span-3">
+                    <div class="sticky top-24">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Table of Contents</h3>
+                        <nav class="space-y-3">
+                            <a href="#problem" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Problem</a>
+                            <a href="#stack" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">7-Tool Stack</a>
+                            <a href="#ignore" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Tools to Ignore</a>
+                            <a href="#setup" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Day-by-Day Setup</a>
+                        </nav>
                     </div>
-                    <div class="ml-4">
-                        <h4 class="font-bold text-lg">Marcus Chen</h4>
-                        <p class="text-gray-400">Founder, Xstream Flex</p>
-                        <p class="text-gray-300 mt-2">I've helped 300+ creators launch their first course. When I'm not building products, I'm testing new tools and sharing what works.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </article>
+                </aside>
 
-    <!-- Related Articles -->
-    <section class="py-20 bg-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-12 text-center">More Articles You Might Like</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
-                        <i class="fas fa-rocket text-4xl text-black opacity-50"></i>
+                <!-- Main Content -->
+                <article class="lg:col-span-9">
+                    <div class="prose prose-invert max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            You've seen the headlines: "Top 50 Tools Every Course Creator Needs!" or "The Ultimate List of 100+ SaaS Apps for Your Business". It's overwhelming and frankly, it's bullshit. Most of those lists are affiliate marketing disguised as advice.
+                        </p>
+
+                        <p class="text-lg leading-relaxed mb-6">
+                            After helping 300+ creators launch their courses, here's what I've learned: you need exactly 7 tools to build a six-figure course business. Everything else is just noise.
+                        </p>
+
+                        <h2 id="problem" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Problem with "All-in-One" Platforms</h2>
+                        <p class="mb-6">Before we dive into the stack, let's address the elephant in the room. Why not just use Teachable, Thinkific, or Kajabi?</p>
+                        <ul class="list-disc list-inside mb-6 space-y-3">
+                            <li><strong>Vendor Lock-in:</strong> Once you're in, you're stuck. Migrating 1,000+ students is a nightmare.</li>
+                            <li><strong>Limited Customization:</strong> Want to add a simple quiz type? Good luck.</li>
+                            <li><strong>Revenue Share:</strong> That 10% transaction fee adds up fast. On a $10,000 launch, you're paying $1,000 just for processing.</li>
+                        </ul>
+
+                        <h2 id="stack" class="text-3xl font-bold mb-4 mt-12 gradient-text">The 7-Tool Tech Stack That Actually Works</h2>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">1. Domain & DNS: Cloudflare ($0/mo)</h3>
+                            <p class="mb-3">Cloudflare's free plan gives you DNS management, SSL certificates, and basic CDN. It's the foundation everything else builds on.</p>
+                            <p class="text-gray-400 text-sm"><em>Pro tip: Set up your domain through Cloudflare Registrar for wholesale pricing (no markup).</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">2. Website Builder: Webflow ($29/mo)</h3>
+                            <p class="mb-3">Webflow gives you the design flexibility of custom code with the ease of a visual builder. Perfect for landing pages, sales pages, and your main site.</p>
+                            <p class="text-gray-400 text-sm"><em>Skip the CMS plan. You don't need dynamic content for a course site.</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">3. Course Platform: Podia ($39/mo)</h3>
+                            <p class="mb-3">Podia offers unlimited everything—courses, students, uploads—for one flat fee. No revenue sharing, no transaction fees.</p>
+                            <p class="text-gray-400 text-sm"><em>Alternative: Teachable at $39/mo if you prefer their interface, but you'll pay 5% transaction fees.</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">4. Email Marketing: ConvertKit ($29/mo)</h3>
+                            <p class="mb-3">ConvertKit's visual automations make it easy to create complex email sequences without a marketing degree.</p>
+                            <p class="text-gray-400 text-sm"><em>Start with the $29 plan. You can always upgrade when you hit 1,000 subscribers.</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">5. Payment Processing: Stripe (2.9% + 30¢)</h3>
+                            <p class="mb-3">Industry standard for online payments. Integrates with everything and handles all the compliance headaches.</p>
+                            <p class="text-gray-400 text-sm"><em>Set up webhooks for instant course access after purchase.</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">6. Analytics: Fathom Analytics ($14/mo)</h3>
+                            <p class="mb-3">Privacy-first analytics that don't slow down your site. See exactly where your sales are coming from without compromising user privacy.</p>
+                            <p class="text-gray-400 text-sm"><em>Google Analytics is free but will kill your page speed scores.</em></p>
+                        </div>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-2xl font-bold mb-4 text-green-500">7. Community: Circle ($49/mo)</h3>
+                            <p class="mb-3">Circle combines the engagement of Facebook Groups with the control of your own platform. No algorithm, no distractions.</p>
+                            <p class="text-gray-400 text-sm"><em>Skip this initially. Start with a free Facebook Group and upgrade when you have 100+ students.</em></p>
+                        </div>
+
+                        <h2 class="text-3xl font-bold mb-6 mt-12 gradient-text">Total Monthly Cost: $160</h2>
+                        <p class="mb-6">Compare that to Kajabi's $199/mo plan (which still charges 0% transaction fees), and you're saving $39/mo while getting more flexibility.</p>
+
+                        <h2 id="ignore" class="text-3xl font-bold mb-6 mt-12 gradient-text">The 15 Tools You Can Ignore (At Least Initially)</h2>
+                        <ul class="list-disc list-inside mb-6 space-y-2">
+                            <li>Webinar platforms (Zoom works fine)</li>
+                            <li>Affiliate software (manual tracking works for 20-50 affiliates)</li>
+                            <li>Survey tools (Google Forms is free)</li>
+                            <li>Calendar booking (Calendly's free tier is enough)</li>
+                            <li>Social media schedulers (manual posting is more authentic)</li>
+                            <li>SEO tools (Google Search Console is all you need)</li>
+                            <li>Heatmap software (overkill for most course sites)</li>
+                            <li>Membership plugins (Podia handles this)</li>
+                            <li>Video hosting (Vimeo/YouTube work fine)</li>
+                            <li>Design tools (Canva's free tier is sufficient)</li>
+                            <li>CRM systems (ConvertKit handles basic CRM)</li>
+                            <li>Help desk software (email works for < 500 students)</li>
+                            <li>Quiz builders (Podia has basic quizzes)</li>
+                            <li>Certificate generators (manual PDFs work)</li>
+                            <li>Mobile app builders (your students won't use them)</li>
+                        </ul>
+
+                        <h2 id="setup" class="text-3xl font-bold mb-6 mt-12 gradient-text">Setting Up Your Stack: Day-by-Day Plan</h2>
+                        <p class="mb-6">Here's exactly how to set everything up in one weekend:</p>
+
+                        <h3 class="text-2xl font-bold mb-4">Day 1: Foundation (2 hours)</h3>
+                        <ul class="list-disc list-inside mb-6 space-y-2">
+                            <li>Buy domain through Cloudflare</li>
+                            <li>Set up DNS records</li>
+                            <li>Create Webflow account and connect domain</li>
+                            <li>Basic Webflow template setup</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-bold mb-4">Day 2: Course & Email (3 hours)</h3>
+                        <ul class="list-disc list-inside mb-6 space-y-2">
+                            <li>Sign up for Podia and create your first course</li>
+                            <li>Set up ConvertKit and create opt-in form</li>
+                            <li>Connect Stripe to Podia</li>
+                            <li>Install Fathom Analytics tracking</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-bold mb-4">Day 3: Test & Launch (1 hour)</h3>
+                        <ul class="list-disc list-inside mb-6 space-y-2">
+                            <li>Test purchase flow end-to-end</li>
+                            <li>Send test email sequence</li>
+                            <li>Check analytics tracking</li>
+                            <li>Soft launch to 5 beta users</li>
+                        </ul>
+
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">🚀 Ready to Launch Faster?</h3>
+                            <p class="text-gray-300">Xstream Flex's Turn Key package includes all these tools pre-configured. We handle the tech so you can focus on content and marketing.</p>
+                            <a href="../index.html#packages" class="inline-flex items-center text-green-500 hover:text-green-400 font-medium mt-4">See what's included <i class="fas fa-arrow-right ml-2"></i></a>
+                        </div>
+
+                        <h2 class="text-3xl font-bold mb-6 mt-12 gradient-text">When to Upgrade Your Stack</h2>
+                        <p class="mb-6">Don't upgrade until you hit these milestones:</p>
+
+                        <ul class="list-disc list-inside mb-6 space-y-3">
+                            <li><strong>Circle ($49/mo):</strong> When you have 100+ students and daily questions</li>
+                            <li><strong>Higher ConvertKit plan ($50/mo):</strong> When you hit 1,000 subscribers</li>
+                            <li><strong>Zapier ($19.99/mo):</strong> When you need to connect 3+ tools</li>
+                            <li><strong>Webflow CMS ($23/mo):</strong> When you want dynamic blog content</li>
+                            <li><strong>First employee:</strong> When you're making $10k+/month consistently</li>
+                        </ul>
+
+                        <p class="text-xl leading-relaxed mt-12">Remember: your tech stack won't make or break your course business. Your content, marketing, and student results will. Start simple, validate demand, then optimize.</p>
                     </div>
-                    <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Strategy</span>
-                        <h3 class="text-lg font-bold mt-2 mb-2">The Launch Speed Advantage</h3>
-                        <p class="text-gray-400 text-sm">Most creators get stuck in "perfect mode" - endlessly tweaking their course...</p>
-                        <a href="#post-1" class="text-green-500 hover:text-green-400 font-medium text-sm mt-4 inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+
+                    <!-- Share Section -->
+                    <div class="border-t border-b border-gray-800 py-6 my-8">
+                        <p class="text-sm text-gray-400 mb-4">Found this helpful? Share it:</p>
+                        <div class="flex gap-3">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-twitter mr-2"></i>Tweet
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-link mr-2"></i>Copy Link
+                            </button>
+                        </div>
                     </div>
-                </article>
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
-                        <i class="fas fa-envelope text-4xl text-black opacity-50"></i>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Strategy</span>
-                        <h3 class="text-lg font-bold mt-2 mb-2">The 5-Email Sequence That Converts</h3>
-                        <p class="text-gray-400 text-sm">Stop overthinking your email marketing. This proven sequence has generated over $1M...</p>
-                        <a href="#post-4" class="text-green-500 hover:text-green-400 font-medium text-sm mt-4 inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-4xl text-black opacity-50"></i>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-green-500 text-sm font-medium">Case Study</span>
-                        <h3 class="text-lg font-bold mt-2 mb-2">How Sarah Made $10K in 30 Days</h3>
-                        <p class="text-gray-400 text-sm">Sarah had never sold an online course before. Using Xstream Flex's Turn Key package...</p>
-                        <a href="#post-3" class="text-green-500 hover:text-green-400 font-medium text-sm mt-4 inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+
+                    <!-- Next Article -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Next Article</h3>
+                        <a href="toolfat.html" class="block bg-gray-900 p-6 rounded-lg hover:border-green-500 border border-transparent transition-all">
+                            <h4 class="text-lg font-bold mb-2">Tool Fatigue is Real</h4>
+                            <p class="text-gray-400">The average creator tries 7 different platforms before finding one that actually works. Here's how to skip the trial-and-error phase...</p>
+                            <span class="text-sm text-green-500 mt-3 inline-block">Read next →</span>
                         </a>
                     </div>
                 </article>
@@ -325,17 +345,86 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
+    <!-- Related Posts -->
+    <section class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-rocket text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The Launch Speed Advantage</h3>
+                        <a href="launchspeed.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Case Study</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">How Sarah Made $10K in 30 Days</h3>
+                        <a href="sarah10k.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-envelope text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The 5-Email Sequence That Converts</h3>
+                        <a href="5email.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
     <section class="py-20 bg-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
             <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
             <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-800 border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
                     Subscribe
                 </button>
             </form>
+        </div>
+    </section>
+
+    <!-- Legal Links -->
+    <section id="legal" class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
+                    <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
+                    <a href="../privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                    <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
+                    <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
+                    <a href="../terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                        View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -344,18 +433,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2 space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
@@ -367,36 +448,68 @@
     </footer>
 
     <script>
+        // ---------- Re-using JS from first snippet ----------
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const menu = document.getElementById('mobile-menu');
-                    menu.classList.add('hidden');
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+        // Reading progress bar
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Table of contents active link
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('[id]');
+
+        window.addEventListener('scroll', function () {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
                 }
             });
         });
 
-        // Newsletter form
-        const newsletterForm = document.querySelector('form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thanks for subscribing! You\'ll receive our next newsletter soon.');
-                this.reset();
+        // Share buttons
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const url = window.location.href;
+                const title = document.querySelector('h1').textContent;
+                if (this.querySelector('.fa-twitter')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-linkedin')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-link')) {
+                    navigator.clipboard.writeText(url);
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                    setTimeout(() => (this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link'), 2000);
+                }
             });
-        }
+        });
+
+        // Smooth scroll TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
