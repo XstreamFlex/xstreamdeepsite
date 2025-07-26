@@ -4,108 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Your Course Right the First Time | Xstream Flex Blog</title>
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&displback toay=swap');
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #000;
-            color: #fff;
-        }
-        
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #000; color: #fff; }
+
+        /* ---------- Re-using styles from the first snippet ---------- */
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        .rocket-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
+        .rocket-animation { animation: float 3s ease-in-out infinite; }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-        
         .blog-card {
             transition: all 0.3s ease;
             border: 1px solid #333;
         }
-        
         .blog-card:hover {
             transform: translateY(-5px);
             border-color: #00ff00;
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
         }
-        
         .feature-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 24px; height: 24px; background: #00ff00; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
             margin-right: 8px;
         }
-        
         .tag {
             transition: all 0.2s ease;
             cursor: pointer;
         }
-        
         .tag:hover {
             background-color: #00ff00;
             color: #000;
         }
-        
         .reading-progress {
             height: 3px;
             background: linear-gradient(90deg, #00ff00, #00cc00);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
+            position: fixed; top: 0; left: 0; z-index: 100;
             transition: width 0.3s ease;
         }
-        
         .toc-link {
             transition: all 0.2s ease;
             border-left: 2px solid transparent;
         }
-        
-        .toc-link:hover,
-        .toc-link.active {
+        .toc-link:hover, .toc-link.active {
             border-left-color: #00ff00;
             color: #00ff00;
         }
-        
         .highlight-box {
             background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
             border-left: 4px solid #00ff00;
         }
-        
         .share-button {
             transition: all 0.3s ease;
         }
-        
         .share-button:hover {
             background-color: rgba(0, 255, 0, 0.1);
             color: #00ff00;
         }
     </style>
 </head>
+
 <body class="min-h-screen">
     <!-- Reading Progress Bar -->
     <div class="reading-progress" id="progress-bar"></div>
-    
-    <!-- Navigation -->
-<nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+
+    <!-- ---------- Navigation (same as template) ---------- -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -123,17 +101,14 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                        <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
                             Get Started
                         </a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -149,13 +124,13 @@
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
-                    <a href="/index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                    <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
                         Get Started
                     </a>
                 </div>
             </div>
         </div>
-    </nav>                 
+    </nav>
 
     <!-- Article Header -->
     <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
@@ -174,14 +149,14 @@
             <p class="text-xl text-gray-300 mb-8">
                 Most creators underprice their courses by 50-70%. Learn the psychology behind pricing and the exact formula to maximize revenue without losing customers.
             </p>
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-black"></i>
-                </div>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&fit=crop&crop=face" 
+                     alt="Kim Deepsyt" 
+                     class="w-12 h-12 rounded-full object-cover">
                 <div>
-                    <p class="font-medium">Marcus Chen</p>
+                    <p class="font-medium">Kim Deepsyt</p>
                     <p class="text-sm text-gray-400">Course Launch Strategist</p>
-                </div>
+              </div>
             </div>
         </div>
     </section>
@@ -215,22 +190,16 @@
                             Here's the thing: your gut feeling is probably costing you thousands. After analyzing 500+ course launches, I've discovered that most creators underprice by 50-70% because they don't understand the psychology behind value perception.
                         </p>
 
-                        <h2 id="psychology" class="text-3xl font-bold mb-4 mt-12">The Psychology of Pricing</h2>
-                        
-                        <p class="mb-6">
-                            Price isn't just a number—it's a signal of value, quality, and transformation. When someone sees a $97 course next to a $997 course, they automatically assume the higher-priced option delivers 10x the results.
-                        </p>
+                        <h2 id="psychology" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Psychology of Pricing</h2>
+                        <p class="mb-6">Price isn't just a number—it's a signal of value, quality, and transformation. When someone sees a $97 course next to a $997 course, they automatically assume the higher-priced option delivers 10x the results.</p>
 
                         <div class="highlight-box p-6 rounded-lg my-8">
                             <h3 class="text-xl font-bold mb-3 text-green-400">Key Insight</h3>
                             <p class="text-gray-300">Students don't buy courses—they buy transformations. Price your course based on the value of the outcome, not the hours of content you provide.</p>
                         </div>
 
-                        <h2 id="formula" class="text-3xl font-bold mb-4 mt-12">The 3-Part Pricing Formula</h2>
-
-                        <p class="mb-6">
-                            After testing dozens of pricing models, here's the formula that consistently maximizes revenue:
-                        </p>
+                        <h2 id="formula" class="text-3xl font-bold mb-4 mt-12 gradient-text">The 3-Part Pricing Formula</h2>
+                        <p class="mb-6">After testing dozens of pricing models, here's the formula that consistently maximizes revenue:</p>
 
                         <ol class="list-decimal list-inside space-y-4 mb-8">
                             <li><strong>Calculate the transformation value</strong> - What's the outcome worth to your student?</li>
@@ -238,41 +207,29 @@
                             <li><strong>Apply the formula:</strong> Price = (Transformation Value × 0.1) × Authority Score</li>
                         </ol>
 
-                        <p class="mb-6">
-                            Example: If your course helps someone land a $60k job, and you're a new creator: ($60,000 × 0.1) × 0.3 = $1,800. This might feel high, but it's actually fair for both parties.
-                        </p>
+                        <p class="mb-6">Example: If your course helps someone land a $60k job, and you're a new creator: ($60,000 × 0.1) × 0.3 = $1,800.</p>
 
-                        <h2 id="tactics" class="text-3xl font-bold mb-4 mt-12">Pricing Tactics That Work</h2>
+                        <h2 id="tactics" class="text-3xl font-bold mb-4 mt-12 gradient-text">Pricing Tactics That Work</h2>
 
                         <h3 class="text-2xl font-bold mb-3 mt-8">1. The Anchor Effect</h3>
-                        <p class="mb-6">
-                            Always present your premium option first. When students see a $2,000 option first, your $497 course feels like a bargain—even if it's the same price you originally planned.
-                        </p>
+                        <p class="mb-6">Always present your premium option first. When students see a $2,000 option first, your $497 course feels like a bargain.</p>
 
                         <h3 class="text-2xl font-bold mb-3 mt-8">2. Payment Plans That Convert</h3>
-                        <p class="mb-6">
-                            Offer 3-6 month payment plans. They increase conversion by 23% while maintaining your full price. Never offer lifetime access for payment plans—students need skin in the game.
-                        </p>
+                        <p class="mb-6">Offer 3-6 month payment plans. They increase conversion by 23% while maintaining your full price.</p>
 
                         <h3 class="text-2xl font-bold mb-3 mt-8">3. The Decoy Effect</h3>
-                        <p class="mb-6">
-                            Create a middle tier that's intentionally less attractive. Most students will choose your premium option when they see the middle tier's poor value proposition.
-                        </p>
+                        <p class="mb-6">Create a middle tier that's intentionally less attractive. Most students will choose your premium option.</p>
 
-                        <h2 id="mistakes" class="text-3xl font-bold mb-4 mt-12">Common Pricing Mistakes</h2>
-
+                        <h2 id="mistakes" class="text-3xl font-bold mb-4 mt-12 gradient-text">Common Pricing Mistakes</h2>
                         <ul class="list-disc list-inside space-y-3 mb-8">
-                            <li><strong>Underpricing to get students:</strong> This signals low quality and attracts bargain hunters who won't take action</li>
+                            <li><strong>Underpricing to get students:</strong> Signals low quality and attracts bargain hunters</li>
                             <li><strong>Over-discounting:</strong> Never offer more than 20% off your regular price</li>
-                            <li><strong>One-size-fits-all pricing:</strong> Always offer at least two tiers to capture different value perceptions</li>
+                            <li><strong>One-size-fits-all pricing:</strong> Always offer at least two tiers</li>
                             <li><strong>Ignoring payment processing fees:</strong> Factor 3-5% into your price</li>
                         </ul>
 
-                        <h2 id="case-study" class="text-3xl font-bold mb-4 mt-12">Real Case Study: From $97 to $2,497</h2>
-
-                        <p class="mb-6">
-                            Meet David, a coding bootcamp graduate who created a Python course. Initially priced at $97, he had 150 students but was barely covering his costs.
-                        </p>
+                        <h2 id="case-study" class="text-3xl font-bold mb-4 mt-12 gradient-text">Real Case Study: From $97 to $2,497</h2>
+                        <p class="mb-6">Meet David, a coding bootcamp graduate who created a Python course. Initially priced at $97, he had 150 students but was barely covering his costs.</p>
 
                         <div class="highlight-box p-6 rounded-lg my-8">
                             <h3 class="text-xl font-bold mb-3 text-green-400">The Transformation</h3>
@@ -285,15 +242,10 @@
                             </ul>
                         </div>
 
-                        <p class="mb-6">
-                            Result: 40 students at $2,497 = $99,880 (vs. $14,550 previously). More importantly, students were more committed and achieved better results.
-                        </p>
+                        <p class="mb-6">Result: 40 students at $2,497 = $99,880 (vs. $14,550 previously).</p>
 
-                        <h2 class="text-3xl font-bold mb-4 mt-12">Your Next Steps</h2>
-
-                        <p class="mb-6">
-                            Don't wait for the "perfect" price. Start with the formula, test with a small group, and adjust based on feedback. Remember: it's easier to lower prices than raise them.
-                        </p>
+                        <h2 class="text-3xl font-bold mb-4 mt-12 gradient-text">Your Next Steps</h2>
+                        <p class="mb-6">Don't wait for the "perfect" price. Start with the formula, test with a small group, and adjust based on feedback.</p>
 
                         <div class="bg-gray-900 p-8 rounded-lg my-8">
                             <h3 class="text-xl font-bold mb-4">Quick Action Checklist</h3>
@@ -348,13 +300,60 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-20 bg-gray-900">
+    <!-- Related Posts -->
+    <section class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-tools text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Tools</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">Tool Fatigue is Real</h3>
+                        <a href="toolfat.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Case Study</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">How Sarah Made $10K in 30 Days</h3>
+                        <a href="sarah10k.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-envelope text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The 5-Email Sequence That Converts</h3>
+                        <a href="5email.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
             <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
             <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
                     Subscribe
                 </button>
@@ -363,22 +362,22 @@
     </section>
 
     <!-- Legal Links -->
-    <section id="legal" class="py-12 bg-black border-t border-gray-800">
+    <section id="legal" class="py-12 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
                     <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
-                    <button  <a href="../privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
                     <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
-                    <button  <a href="../terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -389,18 +388,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2 space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
@@ -412,14 +403,14 @@
     </footer>
 
     <script>
+        // ---------- Re-using JS from the first snippet ----------
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
         // Reading progress bar
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
@@ -430,16 +421,14 @@
         const tocLinks = document.querySelectorAll('.toc-link');
         const sections = document.querySelectorAll('[id]');
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
+                if (scrollY >= sectionTop - 200) {
                     current = section.getAttribute('id');
                 }
             });
-
             tocLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === '#' + current) {
@@ -450,10 +439,9 @@
 
         // Share buttons
         document.querySelectorAll('.share-button').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const url = window.location.href;
                 const title = document.querySelector('h1').textContent;
-                
                 if (this.querySelector('.fa-twitter')) {
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
                 } else if (this.querySelector('.fa-linkedin')) {
@@ -461,24 +449,19 @@
                 } else if (this.querySelector('.fa-link')) {
                     navigator.clipboard.writeText(url);
                     this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
-                    setTimeout(() => {
-                        this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link';
-                    }, 2000);
+                    setTimeout(() => (this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link'), 2000);
                 }
             });
         });
 
-        // Smooth scrolling for TOC links
+        // Smooth scroll TOC links
         tocLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
