@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xstream Flex | Blog - How Sarah Made $10K in 30 Days</title>
+    <title>How Sarah Made $10K in 30 Days | Xstream Flex Blog</title>
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #000;
             color: #fff;
         }
+
+        /* ---------- Re-using styles from the first snippet ---------- */
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
@@ -23,8 +30,8 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
         .blog-card {
@@ -37,13 +44,8 @@
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
         }
         .feature-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 24px; height: 24px; background: #00ff00; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
             margin-right: 8px;
         }
         .tag {
@@ -54,22 +56,40 @@
             background-color: #00ff00;
             color: #000;
         }
-        .prose h2 { color: #00ff00; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
-        .prose p  { color: #d1d5db; line-height: 1.75; margin-bottom: 1rem; }
-        .prose ul  { list-style: square; color: #d1d5db; margin-left: 1.5rem; margin-bottom: 1rem; }
-        .prose li  { margin-bottom: .5rem; }
-        blockquote {
+        .reading-progress {
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: width 0.3s ease;
+        }
+        .toc-link {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        .toc-link:hover, .toc-link.active {
+            border-left-color: #00ff00;
+            color: #00ff00;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
             border-left: 4px solid #00ff00;
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-            font-style: italic;
-            color: #9ca3af;
+        }
+        .share-button {
+            transition: all 0.3s ease;
+        }
+        .share-button:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
         }
     </style>
 </head>
+
 <body class="min-h-screen">
-    <!-- Navigation -->
- <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar"></div>
+
+    <!-- ---------- Navigation (same as first snippet) ---------- -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -87,17 +107,14 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                        <a href="/index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
                             Get Started
                         </a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -109,7 +126,7 @@
                 <a href="/index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="/index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
                 <a href="/blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="/index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Privacy Policy</a>
+                <a href="/index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
@@ -119,28 +136,34 @@
                 </div>
             </div>
         </div>
-    </nav>   
+    </nav>
 
     <!-- Article Header -->
     <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
         <div class="max-w-4xl mx-auto">
-            <nav class="text-sm mb-6">
-                <a href="/blog" class="text-green-400 hover:text-green-300">Blog</a>
-                <span class="mx-2 text-gray-500">/</span>
-                <span class="text-gray-400">Case Study</span>
+            <nav class="text-sm mb-8">
+                <a href="../blog" class="text-green-500 hover:text-green-400">← Back to Blog</a>
             </nav>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-green-500 text-sm font-medium">Case Study</span>
+                <span class="text-gray-500 text-sm">5 min read</span>
+                <span class="text-gray-500 text-sm">Nov 8, 2023</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 How Sarah Made $10K in 30 Days
             </h1>
-            <p class="text-xl text-gray-300 mb-6">Sarah had never sold an online course before. Using Xstream Flex's Turn Key package, she went from idea to $10,000 in revenue in just 30 days. Here's exactly how...</p>
-            <div class="flex items-center text-sm text-gray-400">
-                <span>Nov 8, 2023</span>
-                <span class="mx-4">•</span>
-                <span>5 min read</span>
-                <span class="mx-4">•</span>
-                <span class="text-green-400">Case Study</span>
+            <p class="text-xl text-gray-300 mb-8">
+                Sarah had never sold an online course before. Using Xstream Flex's Turn Key package, she went from idea to $10,000 in revenue in just 30 days. Here's exactly how...
+            </p>
+            <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&fit=crop&crop=face" 
+                     alt="Kim Deepsyt" 
+                     class="w-12 h-12 rounded-full object-cover">
+                <div>
+                    <p class="font-medium">Kim Deepsyt</p>
+                    <p class="text-sm text-gray-400">Course Launch Strategist</p>
+                </div>
             </div>
-        </div>
     </section>
 
     <!-- Article Image -->
@@ -150,131 +173,123 @@
         </div>
     </section>
 
-    <!-- Article Body -->
-    <article class="py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto prose prose-invert">
-            <p><strong>Sarah, a 28-year-old yoga teacher from Denver, had 1,200 Instagram followers, zero tech skills, and an idea for a beginner’s yoga course.</strong> Four weeks later she’d banked her first $10,000 online. Below is the exact playbook—powered by Xstream Flex’s Turn Key package—that she followed.</p>
-
-            <h2>Week 0 – The Problem</h2>
-            <p>Like most creators, Sarah was stuck in analysis-paralysis:</p>
-            <ul>
-                <li>Which platform should she use? (Kajabi? Teachable? ClickFunnels?)</li>
-                <li>How much should she charge?</li>
-                <li>What if nobody buys?</li>
-            </ul>
-            <p>She discovered Xstream Flex through a friend’s tweet and booked a call the same day.</p>
-
-            <h2>Week 1 – Idea → Offer</h2>
-            <p>During her onboarding call, the Xstream Flex strategist helped Sarah:</p>
-            <ul>
-                <li>Nail down a crystal-clear promise: “30-Day Yoga Foundations for Busy Beginners”.</li>
-                <li>Find her MVP: 4 modules, 6 hours of content, lifetime access.</li>
-                <li>Price it at $97 (sweet spot for impulse buyers + high enough to feel premium).</li>
-            </ul>
-            <blockquote>“I thought I had to film 40+ videos. They showed me how to deliver massive value with only 12 concise lessons.”</blockquote>
-
-            <h2>Week 2 – Build & Funnel</h2>
-            <p>Xstream Flex’s Turn Key team handled everything:</p>
-            <ul>
-                <li>Branded landing page with conversion-optimized copy.</li>
-                <li>3-email waitlist sequence (1,417 sign-ups in 48 h).</li>
-                <li>Stripe checkout + order bump ($19 warm-up routine PDF).</li>
-                <li>Mobile-first course portal with progress tracking.</li>
-            </ul>
-            <p>Sarah’s only job was to record the videos on her iPhone (guided by the provided script templates).</p>
-
-            <h2>Week 3 – Launch</h2>
-            <p>Launch day stats:</p>
-            <ul>
-                <li>Email list: 1,417 people</li>
-                <li>Cart open: Wednesday 9 AM MST</li>
-                <li>Price: $97 (early-bird first 48 h), then $127</li>
-            </ul>
-            <p>Results after 72 hours:</p>
-            <ul>
-                <li><strong>103 sales</strong> x $97 = $9,991</li>
-                <li><strong>27 order bumps</strong> x $19 = $513</li>
-                <li><strong>Total revenue: $10,504</strong></li>
-            </ul>
-
-            <h2>Week 4 – Scale</h2>
-            <p>The Xstream Flex team immediately:</p>
-            <ul>
-                <li>Set up an affiliate program (10% commission).</li>
-                <li>Created a $297 upsell (1-on-1 coaching call).</li>
-                <li>Built evergreen webinar funnel (still running).</li>
-            </ul>
-            <p>By month-end Sarah had crossed <strong>$14,700 total</strong> and quit her part-time studio job.</p>
-
-            <h2>Key Takeaways</h2>
-            <ul>
-                <li><strong>Speed &gt; Perfection</strong> – She launched in 21 days, not 3 months.</li>
-                <li><strong>Trust the process</strong> – The Turn Key package removed 90% of the tech headaches.</li>
-                <li><strong>Small list, big leverage</strong> – 1,417 targeted subscribers > 15,000 cold followers.</li>
-            </ul>
-
-            <p>Ready to write your own story? <a href="/#packages" class="text-green-400 underline hover:text-green-300">Pick your package</a> and let’s get you to your first $10K.</p>
-        </div>
-
-        <!-- Author Box -->
-        <div class="max-w-4xl mx-auto mt-16 p-6 bg-gray-900 rounded-lg flex items-start gap-4">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" alt="Author" class="w-16 h-16 rounded-full object-cover">
-            <div>
-                <h3 class="font-bold text-white">Written by the Xstream Flex Team</h3>
-                <p class="text-sm text-gray-400 mt-1">We help creators launch profitable digital products in record time.</p>
-            </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="max-w-4xl mx-auto mt-12 text-center">
-            <h3 class="text-2xl font-bold mb-4">Want results like Sarah?</h3>
-            <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-8 py-3 rounded-md font-medium transition duration-300 inline-flex items-center">
-                See the Turn Key Package <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </article>
-
-    <!-- Related Posts -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-8 text-center">Related Articles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Related 1 -->
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
-                        <i class="fas fa-rocket text-5xl text-black opacity-50"></i>
+    <!-- Article Content -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <!-- Table of Contents -->
+                <aside class="hidden lg:block lg:col-span-3">
+                    <div class="sticky top-24">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Table of Contents</h3>
+                        <nav class="space-y-3">
+                            <a href="#the-problem" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Problem</a>
+                            <a href="#week-1" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Week 1 – Idea → Offer</a>
+                            <a href="#week-2" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Week 2 – Build & Funnel</a>
+                            <a href="#week-3" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Week 3 – Launch</a>
+                            <a href="#week-4" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Week 4 – Scale</a>
+                            <a href="#key-takeaways" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Key Takeaways</a>
+                        </nav>
                     </div>
-                    <div class="p-5">
-                        <span class="text-green-400 text-xs font-medium">Strategy</span>
-                        <h3 class="font-bold text-lg mt-2">The Launch Speed Advantage</h3>
-                        <a href="/blog/launch-speed" class="text-green-400 hover:text-green-300 text-sm font-medium inline-flex items-center mt-3">
-                            Read Article <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
+                </aside>
+
+                <!-- Main Content -->
+                <article class="lg:col-span-9">
+                    <div class="prose prose-invert max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            <strong>Sarah, a 28-year-old yoga teacher from Denver, had 1,200 Instagram followers, zero tech skills, and an idea for a beginner's yoga course.</strong> Four weeks later she'd banked her first $10,000 online. Below is the exact playbook—powered by Xstream Flex's Turn Key package—that she followed.
+                        </p>
+
+                        <h2 id="the-problem" class="text-3xl font-bold mb-4 mt-12 gradient-text">Week 0 – The Problem</h2>
+                        <p class="mb-6">Like most creators, Sarah was stuck in analysis-paralysis:</p>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li>Which platform should she use? (Kajabi? Teachable? ClickFunnels?)</li>
+                            <li>How much should she charge?</li>
+                            <li>What if nobody buys?</li>
+                        </ul>
+                        <p class="mb-6">She discovered Xstream Flex through a friend's tweet and booked a call the same day.</p>
+
+                        <h2 id="week-1" class="text-3xl font-bold mb-4 mt-12 gradient-text">Week 1 – Idea → Offer</h2>
+                        <p class="mb-6">During her onboarding call, the Xstream Flex strategist helped Sarah:</p>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li>Nail down a crystal-clear promise: "30-Day Yoga Foundations for Busy Beginners".</li>
+                            <li>Find her MVP: 4 modules, 6 hours of content, lifetime access.</li>
+                            <li>Price it at $97 (sweet spot for impulse buyers + high enough to feel premium).</li>
+                        </ul>
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <p class="text-gray-300 italic">"I thought I had to film 40+ videos. They showed me how to deliver massive value with only 12 concise lessons."</p>
+                        </div>
+
+                        <h2 id="week-2" class="text-3xl font-bold mb-4 mt-12 gradient-text">Week 2 – Build & Funnel</h2>
+                        <p class="mb-6">Xstream Flex's Turn Key team handled everything:</p>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li>Branded landing page with conversion-optimized copy.</li>
+                            <li>3-email waitlist sequence (1,417 sign-ups in 48 h).</li>
+                            <li>Stripe checkout + order bump ($19 warm-up routine PDF).</li>
+                            <li>Mobile-first course portal with progress tracking.</li>
+                        </ul>
+                        <p class="mb-6">Sarah's only job was to record the videos on her iPhone (guided by the provided script templates).</p>
+
+                        <h2 id="week-3" class="text-3xl font-bold mb-4 mt-12 gradient-text">Week 3 – Launch</h2>
+                        <p class="mb-6">Launch day stats:</p>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li>Email list: 1,417 people</li>
+                            <li>Cart open: Wednesday 9 AM MST</li>
+                            <li>Price: $97 (early-bird first 48 h), then $127</li>
+                        </ul>
+
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">Results after 72 hours:</h3>
+                            <ul class="list-none space-y-2">
+                                <li><strong>103 sales</strong> x $97 = $9,991</li>
+                                <li><strong>27 order bumps</strong> x $19 = $513</li>
+                                <li><strong>Total revenue: $10,504</strong></li>
+                            </ul>
+                        </div>
+
+                        <h2 id="week-4" class="text-3xl font-bold mb-4 mt-12 gradient-text">Week 4 – Scale</h2>
+                        <p class="mb-6">The Xstream Flex team immediately:</p>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li>Set up an affiliate program (10% commission).</li>
+                            <li>Created a $297 upsell (1-on-1 coaching call).</li>
+                            <li>Built evergreen webinar funnel (still running).</li>
+                        </ul>
+                        <p class="mb-6">By month-end Sarah had crossed <strong>$14,700 total</strong> and quit her part-time studio job.</p>
+
+                        <h2 id="key-takeaways" class="text-3xl font-bold mb-4 mt-12 gradient-text">Key Takeaways</h2>
+                        <ul class="list-disc list-inside space-y-3 mb-8">
+                            <li><strong>Speed > Perfection</strong> – She launched in 21 days, not 3 months.</li>
+                            <li><strong>Trust the process</strong> – The Turn Key package removed 90% of the tech headaches.</li>
+                            <li><strong>Small list, big leverage</strong> – 1,417 targeted subscribers > 15,000 cold followers.</li>
+                        </ul>
+
+                        <p class="text-lg leading-relaxed mb-6">
+                            Ready to write your own story? <a href="/index.html#packages" class="text-green-500 hover:text-green-400 underline">Pick your package</a> and let's get you to your first $10K.
+                        </p>
                     </div>
-                </article>
-                <!-- Related 2 -->
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
-                        <i class="fas fa-dollar-sign text-5xl text-black opacity-50"></i>
+
+                    <!-- Share Section -->
+                    <div class="border-t border-b border-gray-800 py-6 my-8">
+                        <p class="text-sm text-gray-400 mb-4">Found this helpful? Share it:</p>
+                        <div class="flex gap-3">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-twitter mr-2"></i>Tweet
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-link mr-2"></i>Copy Link
+                            </button>
+                        </div>
                     </div>
-                    <div class="p-5">
-                        <span class="text-green-400 text-xs font-medium">Strategy</span>
-                        <h3 class="font-bold text-lg mt-2">Price Your Course Right the First Time</h3>
-                        <a href="/blog/pricing" class="text-green-400 hover:text-green-300 text-sm font-medium inline-flex items-center mt-3">
-                            Read Article <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </article>
-                <!-- Related 3 -->
-                <article class="blog-card bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
-                        <i class="fas fa-tools text-5xl text-black opacity-50"></i>
-                    </div>
-                    <div class="p-5">
-                        <span class="text-green-400 text-xs font-medium">Tools</span>
-                        <h3 class="font-bold text-lg mt-2">Tool Fatigue is Real</h3>
-                        <a href="/blog/tool-fatigue" class="text-green-400 hover:text-green-300 text-sm font-medium inline-flex items-center mt-3">
-                            Read Article <i class="fas fa-arrow-right ml-1"></i>
+
+                    <!-- Next Article -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Next Article</h3>
+                        <a href="/blog/launch-speed" class="block bg-gray-900 p-6 rounded-lg hover:border-green-500 border border-transparent transition-all">
+                            <h4 class="text-lg font-bold mb-2">The Launch Speed Advantage</h4>
+                            <p class="text-gray-400">Most creators get stuck in "perfect mode" - endlessly tweaking their course or product before launch. But speed to market is your greatest competitive advantage...</p>
+                            <span class="text-sm text-green-500 mt-3 inline-block">Read next →</span>
                         </a>
                     </div>
                 </article>
@@ -282,13 +297,60 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-20 bg-gray-900">
+    <!-- Related Posts -->
+    <section class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-rocket text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The Launch Speed Advantage</h3>
+                        <a href="/blog/launch-speed.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-dollar-sign text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">Price Your Course Right</h3>
+                        <a href="/blog/pricing.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-tools text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Tools</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">Tool Fatigue is Real</h3>
+                        <a href="/blog/tool-fatigue.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
             <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
             <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
                     Subscribe
                 </button>
@@ -297,22 +359,22 @@
     </section>
 
     <!-- Legal Links -->
-    <section id="legal" class="py-12 bg-black border-t border-gray-800">
+    <section id="legal" class="py-12 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
                     <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="/privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
                     <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="/terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -323,18 +385,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2 space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
@@ -346,23 +400,65 @@
     </footer>
 
     <script>
+        // ---------- Re-using JS from first snippet ----------
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Reading progress bar
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Table of contents active link
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('[id]');
+
+        window.addEventListener('scroll', function () {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Share buttons
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const url = window.location.href;
+                const title = document.querySelector('h1').textContent;
+                if (this.querySelector('.fa-twitter')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-linkedin')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-link')) {
+                    navigator.clipboard.writeText(url);
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                    setTimeout(() => (this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link'), 2000);
+                }
+            });
+        });
+
+        // Smooth scroll TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    const menu = document.getElementById('mobile-menu');
-                    menu.classList.add('hidden');
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
