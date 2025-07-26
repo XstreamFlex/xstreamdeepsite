@@ -3,72 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xstream Flex | Tool Fatigue is Real</title>
+    <title>Tool Fatigue is Real | Xstream Flex Blog</title>
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #000;
             color: #fff;
-            line-height: 1.7;
         }
-        
+
+        /* ---------- Re-using styles from the first snippet ---------- */
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        .highlight-green {
-            color: #00ff00;
-            font-weight: 600;
+        .rocket-animation {
+            animation: float 3s ease-in-out infinite;
         }
-        
-        .code-block {
-            background: #111;
-            border-left: 4px solid #00ff00;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            font-family: 'Courier New', monospace;
-            color: #e5e5e5;
-            margin: 1.5rem 0;
-            overflow-x: auto;
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
-        
-        .toc-link {
-            transition: all 0.3s ease;
-            border-left: 2px solid transparent;
-            padding-left: 1rem;
-        }
-        
-        .toc-link:hover {
-            border-left: 2px solid #00ff00;
-            color: #00ff00;
-        }
-        
-        .toc-link.active {
-            border-left: 2px solid #00ff00;
-            color: #00ff00;
-        }
-        
-        .share-btn {
+        .blog-card {
             transition: all 0.3s ease;
             border: 1px solid #333;
         }
-        
-        .share-btn:hover {
+        .blog-card:hover {
+            transform: translateY(-5px);
             border-color: #00ff00;
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
+        }
+        .feature-icon {
+            width: 24px; height: 24px; background: #00ff00; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-right: 8px;
+        }
+        .tag {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .tag:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+        .reading-progress {
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: width 0.3s ease;
+        }
+        .toc-link {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        .toc-link:hover, .toc-link.active {
+            border-left-color: #00ff00;
+            color: #00ff00;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
+            border-left: 4px solid #00ff00;
+        }
+        .share-button {
+            transition: all 0.3s ease;
+        }
+        .share-button:hover {
+            background-color: rgba(0, 255, 0, 0.1);
             color: #00ff00;
         }
     </style>
 </head>
+
 <body class="min-h-screen">
-    <!-- Navigation -->
- <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar"></div>
+
+    <!-- ---------- Navigation (same as first snippet) ---------- -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -77,26 +98,23 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
-                            <a href="blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="#privacy" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Privacy Policy</a>
+                            <a href="../index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="../blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="../index.html#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                        <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
                             Get Started
                         </a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -105,220 +123,235 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
-                <a href="blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Privacy Policy</a>
+                <a href="../index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="../blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="../index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
-                    <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                    <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
                         Get Started
                     </a>
                 </div>
             </div>
         </div>
-    </nav>   
-    
+    </nav>
+
     <!-- Article Header -->
-    <section class="pt-32 pb-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+    <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
         <div class="max-w-4xl mx-auto">
-            <a href="/blog" class="text-green-500 hover:text-green-400 text-sm font-medium mb-4 inline-flex items-center">
-                <i class="fas fa-arrow-left mr-2"></i> Back to all articles
-            </a>
-            <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-                Tool Fatigue is Real: Why Creators Are Drowning in <span class="gradient-text">Platform Overload</span>
+            <nav class="text-sm mb-8">
+                <a href="../blog" class="text-green-500 hover:text-green-400">← Back to Blog</a>
+            </nav>
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-green-500 text-sm font-medium">Tools</span>
+                <span class="text-gray-500 text-sm">4 min read</span>
+                <span class="text-gray-500 text-sm">Nov 12, 2023</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Tool Fatigue is Real: Why Creators Are Drowning in Platform Overload
             </h1>
-            <p class="text-lg text-gray-300 mb-6">
+            <p class="text-xl text-gray-300 mb-8">
                 The average creator tries 7 different platforms before finding one that works. Here's how to break the cycle.
             </p>
-            <div class="flex items-center space-x-4 text-sm text-gray-400">
-                <span>Nov 12, 2023</span>
-                <span>•</span>
-                <span>4 min read</span>
-                <span>•</span>
-                <span class="text-green-500">Tools</span>
-            </div>
-        </div>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&fit=crop&crop=face" 
+                     alt="Kim Deepsyt" 
+                     class="w-12 h-12 rounded-full object-cover">
+                <div>
+                    <p class="font-medium">Kim Deepsyt</p>
+                    <p class="text-sm text-gray-400">Course Launch Strategist</p>
+              </div>
     </section>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
-            
-            <!-- Table of Contents (Desktop) -->
-            <aside class="hidden lg:block lg:col-span-1">
-                <div class="sticky top-24 bg-gray-900 p-6 rounded-lg border border-gray-800">
-                    <h3 class="text-lg font-bold mb-4">Table of Contents</h3>
-                    <nav class="space-y-2">
-                        <a href="#intro" class="toc-link block text-sm text-gray-400 hover:text-white">The Platform Problem</a>
-                        <a href="#stats" class="toc-link block text-sm text-gray-400 hover:text-white">The Numbers</a>
-                        <a href="#integration" class="toc-link block text-sm text-gray-400 hover:text-white">Integration Hell</a>
-                        <a href="#solution" class="toc-link block text-sm text-gray-400 hover:text-white">The Xstream Flex Fix</a>
-                        <a href="#checklist" class="toc-link block text-sm text-gray-400 hover:text-white">Your Checklist</a>
-                    </nav>
-                </div>
-            </aside>
-
-            <!-- Article Content -->
-            <article class="lg:col-span-3">
-                <section id="intro">
-                    <p class="text-lg text-gray-300 mb-6">
-                        You're not imagining it. The creator economy has exploded with tools promising to solve every problem. But here's the kicker: <span class="highlight-green">the more tools you use, the less you actually get done</span>.
-                    </p>
-
-                    <p class="text-gray-300 mb-6">
-                        I recently surveyed 200+ course creators and found something shocking. The average creator is juggling <span class="highlight-green">12 different paid subscriptions</span> just to run their online course business. Twelve. That's not including the free trials they forgot to cancel.
-                    </p>
-
-                    <blockquote class="border-l-4 border-green-500 pl-6 my-8 text-xl italic text-gray-300">
-                        "I spend more time managing my tech stack than creating content. Something's broken."
-                        <span class="block text-sm text-gray-500 mt-2">— Sarah M., Course Creator</span>
-                    </blockquote>
-                </section>
-
-                <section id="stats">
-                    <h2 class="text-2xl font-bold mb-4 mt-12">The Numbers Don't Lie</h2>
-                    
-                    <p class="text-gray-300 mb-6">
-                        Let's break down what tool fatigue actually costs you:
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
-                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-                            <div class="text-3xl font-bold text-green-500 mb-2">$427</div>
-                            <div class="text-sm text-gray-400">Average monthly tool spend</div>
-                        </div>
-                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-                            <div class="text-3xl font-bold text-green-500 mb-2">8.5 hrs</div>
-                            <div class="text-sm text-gray-400">Weekly integration time</div>
-                        </div>
-                        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
-                            <div class="text-3xl font-bold text-green-500 mb-2">73%</div>
-                            <div class="text-sm text-gray-400">Abandon tools within 90 days</div>
-                        </div>
+    <!-- Article Content -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <!-- Table of Contents -->
+                <aside class="hidden lg:block lg:col-span-3">
+                    <div class="sticky top-24">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Table of Contents</h3>
+                        <nav class="space-y-3">
+                            <a href="#the-paradox" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Platform Problem</a>
+                            <a href="#the-numbers" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Numbers</a>
+                            <a href="#integration" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Integration Hell</a>
+                            <a href="#the-fix" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Xstream Flex Fix</a>
+                            <a href="#checklist" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Your Checklist</a>
+                        </nav>
                     </div>
-                </section>
+                </aside>
 
-                <section id="integration">
-                    <h2 class="text-2xl font-bold mb-4 mt-12">Integration Hell: A Real Example</h2>
-                    
-                    <p class="text-gray-300 mb-6">
-                        Here's what the typical creator's workflow looks like:
-                    </p>
-
-                    <div class="code-block">
-                        1. Teachable (Course hosting) → Zapier → Mailchimp → ConvertKit<br>
-                        2. Zoom (Live sessions) → Google Drive → Dropbox (Backups)<br>
-                        3. Stripe (Payments) → Zapier → Google Sheets → Airtable<br>
-                        4. Typeform (Surveys) → Zapier → Slack → Trello
-                    </div>
-
-                    <p class="text-gray-300 mb-6">
-                        Notice anything? <span class="highlight-green">Every single step requires another tool</span>. When one breaks (and they always do), your entire system crumbles.
-                    </p>
-                </section>
-
-                <section id="solution">
-                    <h2 class="text-2xl font-bold mb-4 mt-12">The Xstream Flex Fix: One Platform, Everything You Need</h2>
-                    
-                    <p class="text-gray-300 mb-6">
-                        We designed Xstream Flex to solve this exact problem. Instead of 12 different tools, you get one platform that actually does everything:
-                    </p>
-
-                    <ul class="list-disc list-inside text-gray-300 space-y-3 mb-6">
-                        <li>Course creation & hosting (replace Teachable)</li>
-                        <li>Email marketing (replace ConvertKit)</li>
-                        <li>Payment processing (replace Stripe)</li>
-                        <li>Video hosting (replace Vimeo)</li>
-                        <li>Student management (replace Airtable)</li>
-                        <li>Sales pages (replace ClickFunnels)</li>
-                    </ul>
-
-                    <p class="text-gray-300 mb-6">
-                        The best part? <span class="highlight-green">Everything talks to each other seamlessly</span>. No more Zapier zaps breaking at 2 AM.
-                    </p>
-                </section>
-
-                <section id="checklist">
-                    <h2 class="text-2xl font-bold mb-4 mt-12">Your Tool Audit Checklist</h2>
-                    
-                    <p class="text-gray-300 mb-6">
-                        Ready to simplify? Here's exactly what to do:
-                    </p>
-
-                    <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 mb-6">
-                        <h3 class="text-lg font-bold mb-4 text-green-500">Step-by-step audit:</h3>
-                        <ol class="list-decimal list-inside text-gray-300 space-y-2">
-                            <li>List every tool you pay for</li>
-                            <li>Calculate monthly/yearly cost</li>
-                            <li>Mark which ones you actually use</li>
-                            <li>Identify overlapping features</li>
-                            <li>Cancel the ones you don't need</li>
-                        </ol>
-                    </div>
-
-                    <p class="text-gray-300 mb-6">
-                        Most creators who do this audit save <span class="highlight-green">$200-300/month</span> and gain back 10+ hours per week.
-                    </p>
-                </section>
-
-                <!-- CTA Section -->
-                <section class="mt-16 py-12 bg-gray-900 rounded-lg border border-gray-800">
-                    <div class="text-center px-6">
-                        <h3 class="text-2xl font-bold mb-4">Ready to ditch the tool chaos?</h3>
-                        <p class="text-gray-300 mb-6">
-                            See how Xstream Flex can replace your entire tool stack with one platform.
+                <!-- Main Content -->
+                <article class="lg:col-span-9">
+                    <div class="prose prose-invert max-w-none">
+                        <p class="text-lg leading-relaxed mb-6">
+                            You're not imagining it. The creator economy has exploded with tools promising to solve every problem. But here's the kicker: <strong>the more tools you use, the less you actually get done</strong>.
                         </p>
-                        <a href="/#packages" class="bg-green-500 hover:bg-green-600 text-black px-8 py-3 rounded-md font-medium transition duration-300 inline-block">
-                            Start Your Free Trial
-                        </a>
-                    </div>
-                </section>
 
-                <!-- Share Section -->
-                <footer class="mt-12 pt-8 border-t border-gray-800">
-                    <div class="flex items-center justify-between">
-                        <p class="text-gray-400 text-sm">Share this article:</p>
-                        <div class="flex space-x-3">
-                            <button class="share-btn bg-gray-900 px-4 py-2 rounded-md text-sm">
+                        <p class="text-lg leading-relaxed mb-6">
+                            I recently surveyed 200+ course creators and found something shocking. The average creator is juggling <strong>12 different paid subscriptions</strong> just to run their online course business. Twelve. That's not including the free trials they forgot to cancel.
+                        </p>
+
+                        <blockquote class="border-l-4 border-green-500 pl-6 my-8 text-xl italic text-gray-300">
+                            "I spend more time managing my tech stack than creating content. Something's broken."
+                            <span class="block text-sm text-gray-500 mt-2">— Sarah M., Course Creator</span>
+                        </blockquote>
+
+                        <h2 id="the-paradox" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Platform Problem</h2>
+                        <p class="mb-6">It's what I call the "Frankenstein Effect" - your business becomes this patchwork of tools that barely talk to each other. Each promises to be the "missing piece," but they just add more complexity.</p>
+
+                        <h2 id="the-numbers" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Numbers Don't Lie</h2>
+                        <p class="mb-6">Let's break down what tool fatigue actually costs you:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                                <div class="text-4xl font-bold text-green-500 mb-2">$427</div>
+                                <div class="text-sm text-gray-400">Average monthly tool spend</div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                                <div class="text-4xl font-bold text-green-500 mb-2">8.5 hrs</div>
+                                <div class="text-sm text-gray-400">Weekly integration time</div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                                <div class="text-4xl font-bold text-green-500 mb-2">73%</div>
+                                <div class="text-sm text-gray-400">Abandon tools within 90 days</div>
+                            </div>
+                        </div>
+
+                        <h2 id="integration" class="text-3xl font-bold mb-4 mt-12 gradient-text">Integration Hell: A Real Example</h2>
+                        <p class="mb-6">Here's what the typical creator's workflow looks like:</p>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 my-8">
+                            <ol class="space-y-3 font-mono text-sm text-green-400">
+                                <li>Teachable (Course hosting) → Zapier → Mailchimp → ConvertKit</li>
+                                <li>Zoom (Live sessions) → Google Drive → Dropbox (Backups)</li>
+                                <li>Stripe (Payments) → Zapier → Google Sheets → Airtable</li>
+                                <li>Typeform (Surveys) → Zapier → Slack → Trello</li>
+                            </ol>
+                        </div>
+
+                        <p class="mb-6">Notice anything? <strong>Every single step requires another tool</strong>. When one breaks (and they always do), your entire system crumbles.</p>
+
+                        <h2 id="the-fix" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Xstream Flex Fix: One Platform, Everything You Need</h2>
+                        <p class="mb-6">We designed Xstream Flex to solve this exact problem. Instead of 12 different tools, you get one platform that actually does everything:</p>
+
+                        <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+                            <h3 class="text-green-500 font-bold mb-4">What Xstream Flex replaces:</h3>
+                            <ul class="space-y-2">
+                                <li>Course creation & hosting (replace Teachable)</li>
+                                <li>Email marketing (replace ConvertKit)</li>
+                                <li>Payment processing (replace Stripe)</li>
+                                <li>Video hosting (replace Vimeo)</li>
+                                <li>Student management (replace Airtable)</li>
+                                <li>Sales pages (replace ClickFunnels)</li>
+                            </ul>
+                        </div>
+
+                        <p class="mb-6">The best part? <strong>Everything talks to each other seamlessly</strong>. No more Zapier zaps breaking at 2 AM.</p>
+
+                        <h2 id="checklist" class="text-3xl font-bold mb-4 mt-12 gradient-text">Your Tool Audit Checklist</h2>
+                        <p class="mb-6">Ready to simplify? Here's exactly what to do:</p>
+
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">Step-by-step audit:</h3>
+                            <ol class="list-decimal list-inside text-gray-300 space-y-2">
+                                <li>List every tool you pay for</li>
+                                <li>Calculate monthly/yearly cost</li>
+                                <li>Mark which ones you actually use</li>
+                                <li>Identify overlapping features</li>
+                                <li>Cancel the ones you don't need</li>
+                            </ol>
+                        </div>
+
+                        <p class="mb-6">Most creators who do this audit save <strong>$200-300/month</strong> and gain back 10+ hours per week.</p>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="border-t border-b border-gray-800 py-6 my-8">
+                        <p class="text-sm text-gray-400 mb-4">Found this helpful? Share it:</p>
+                        <div class="flex gap-3">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
                                 <i class="fab fa-twitter mr-2"></i>Tweet
                             </button>
-                            <button class="share-btn bg-gray-900 px-4 py-2 rounded-md text-sm">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
                                 <i class="fab fa-linkedin mr-2"></i>LinkedIn
                             </button>
-                            <button class="share-btn bg-gray-900 px-4 py-2 rounded-md text-sm">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
                                 <i class="fas fa-link mr-2"></i>Copy Link
                             </button>
                         </div>
                     </div>
-                </footer>
-            </article>
 
-            <!-- Mobile Table of Contents (Bottom) -->
-            <div class="lg:hidden mt-12">
-                <details class="bg-gray-900 p-4 rounded-lg border border-gray-800">
-                    <summary class="cursor-pointer font-medium">Table of Contents</summary>
-                    <nav class="mt-4 space-y-2">
-                        <a href="#intro" class="block text-sm text-gray-400 hover:text-white">The Platform Problem</a>
-                        <a href="#stats" class="block text-sm text-gray-400 hover:text-white">The Numbers</a>
-                        <a href="#integration" class="block text-sm text-gray-400 hover:text-white">Integration Hell</a>
-                        <a href="#solution" class="block text-sm text-gray-400 hover:text-white">The Xstream Flex Fix</a>
-                        <a href="#checklist" class="block text-sm text-gray-400 hover:text-white">Your Checklist</a>
-                    </nav>
-                </details>
+                    <!-- Next Article -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Next Article</h3>
+                        <a href="/blog/launch-speed" class="block bg-gray-900 p-6 rounded-lg hover:border-green-500 border border-transparent transition-all">
+                            <h4 class="text-lg font-bold mb-2">The Launch Speed Advantage</h4>
+                            <p class="text-gray-400">Why perfect is the enemy of profit, and how to launch in 7 days instead of 7 months...</p>
+                            <span class="text-sm text-green-500 mt-3 inline-block">Read next →</span>
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-20 bg-gray-900">
+    <!-- Related Posts -->
+    <section class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-rocket text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The Launch Speed Advantage</h3>
+                        <a href="launchspeed.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-dollar-sign text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Case Study</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">How Sarah Made $10K in 30 Days</h3>
+                        <a href="sarah10k.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-envelope text-5xl text-black opacity-50"></i>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The 5-Email Sequence That Converts</h3>
+                        <a href="5email.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
             <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
             <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" 
-                       class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
+                <input type="email" placeholder="Enter your email" class="flex-1 bg-gray-900 border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
                     Subscribe
                 </button>
@@ -327,22 +360,22 @@
     </section>
 
     <!-- Legal Links -->
-    <section id="legal" class="py-12 bg-black border-t border-gray-800">
+    <section id="legal" class="py-12 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
                     <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
                     <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -353,18 +386,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2 space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
@@ -376,19 +401,28 @@
     </footer>
 
     <script>
+        // ---------- Re-using JS from first snippet ----------
         // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Smooth scrolling for TOC links
+        // Reading progress bar
+        window.addEventListener('scroll', function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Smooth scroll TOC links
         document.querySelectorAll('.toc-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
@@ -404,7 +438,7 @@
             entries.forEach(entry => {
                 const id = entry.target.getAttribute('id');
                 const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
-                
+
                 if (entry.isIntersecting) {
                     document.querySelectorAll('.toc-link').forEach(link => link.classList.remove('active'));
                     if (tocLink) tocLink.classList.add('active');
@@ -417,22 +451,19 @@
             observer.observe(section);
         });
 
-        // Share functionality
-        document.querySelectorAll('.share-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+        // Share buttons
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', function () {
                 const url = window.location.href;
                 const title = document.querySelector('h1').textContent;
-                
-                if (this.textContent.includes('Tweet')) {
-                    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`);
-                } else if (this.textContent.includes('LinkedIn')) {
-                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`);
-                } else if (this.textContent.includes('Copy')) {
+                if (this.querySelector('.fa-twitter')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-linkedin')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
+                } else if (this.querySelector('.fa-link')) {
                     navigator.clipboard.writeText(url);
                     this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
-                    setTimeout(() => {
-                        this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link';
-                    }, 2000);
+                    setTimeout(() => (this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link'), 2000);
                 }
             });
         });
