@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Launch Speed Advantage | Xstream Flex Blog</title>
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #000;
             color: #fff;
         }
+
+        /* ---------- Re-using styles from the first snippet ---------- */
         .gradient-text {
             background: linear-gradient(90deg, #00ff00, #00cc00);
             -webkit-background-clip: text;
@@ -23,8 +30,8 @@
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
         .blog-card {
@@ -37,13 +44,8 @@
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
         }
         .feature-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #00ff00;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 24px; height: 24px; background: #00ff00; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
             margin-right: 8px;
         }
         .tag {
@@ -54,57 +56,40 @@
             background-color: #00ff00;
             color: #000;
         }
-        .progress-bar {
-            width: 0%;
-            height: 2px;
+        .reading-progress {
+            height: 3px;
             background: linear-gradient(90deg, #00ff00, #00cc00);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            transition: width 0.25s ease-out;
+            position: fixed; top: 0; left: 0; z-index: 100;
+            transition: width 0.3s ease;
         }
-        .toc-link.active {
-            color: #00ff00;
-            border-left: 2px solid #00ff00;
-            padding-left: 1rem;
-        }
-        .share-button {
+        .toc-link {
             transition: all 0.2s ease;
+            border-left: 2px solid transparent;
         }
-        .share-button:hover {
-            transform: translateY(-2px);
+        .toc-link:hover, .toc-link.active {
+            border-left-color: #00ff00;
             color: #00ff00;
-        }
-        code {
-            background-color: #1a1a1a;
-            color: #00ff00;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-family: 'Fira Code', monospace;
-        }
-        pre {
-            background-color: #1a1a1a;
-            border-left: 4px solid #00ff00;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
         }
         .highlight-box {
             background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 204, 0, 0.05));
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            border-left: 4px solid #00ff00;
+        }
+        .share-button {
+            transition: all 0.3s ease;
+        }
+        .share-button:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progress-bar"></div>
 
-    <!-- Navigation -->
- <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+<body class="min-h-screen">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="progress-bar"></div>
+
+    <!-- ---------- Navigation (same as first snippet) ---------- -->
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -113,26 +98,23 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="/index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="/index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
-                            <a href="/blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="/index.html#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
+                            <a href="../index.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Packages</a>
+                            <a href="../blog.html" class="text-gray-300 hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                            <a href="../index.html#legal" class="text-green-400 hover:text-green-300 px-3 py-2 rounded-md text-sm font-medium">Legal</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
+                        <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium transition duration-300">
                             Get Started
                         </a>
                     </div>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -141,94 +123,92 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="/index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
-                <a href="/blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="/index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Privacy Policy</a>
+                <a href="../index.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="../index.html#packages" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Packages</a>
+                <a href="../blog.html" class="text-gray-300 hover:text-green-400 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="../index.html#legal" class="text-green-400 hover:text-green-300 block px-3 py-2 rounded-md text-base font-medium">Legal</a>
             </div>
             <div class="pt-4 pb-3 border-t border-gray-700">
                 <div class="flex items-center px-5">
-                    <a href="/index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
+                    <a href="../index.html#packages" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md text-sm font-medium w-full transition duration-300 block text-center">
                         Get Started
                     </a>
                 </div>
             </div>
         </div>
-    </nav>   
+    </nav>
 
     <!-- Article Header -->
-    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
+    <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
         <div class="max-w-4xl mx-auto">
-            <div class="flex items-center mb-4">
-                <a href="/blog" class="text-green-500 hover:text-green-400 text-sm font-medium flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Blog
-                </a>
+            <nav class="text-sm mb-8">
+                <a href="../blog" class="text-green-500 hover:text-green-400">← Back to Blog</a>
+            </nav>
+            <div class="flex items-center gap-4 mb-6">
+                <span class="text-green-500 text-sm font-medium">Strategy</span>
+                <span class="text-gray-500 text-sm">8 min read</span>
+                <span class="text-gray-500 text-sm">Nov 15, 2023</span>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 The Launch Speed Advantage: Why Perfect is the Enemy of Profit
             </h1>
-            <p class="text-xl text-gray-300 mb-8 max-w-3xl">
+            <p class="text-xl text-gray-300 mb-8">
                 Most creators get stuck in "perfect mode" - endlessly tweaking their course or product before launch. But speed to market is your greatest competitive advantage in the creator economy.
             </p>
-            <div class="flex items-center space-x-6 text-sm text-gray-400">
-                <span class="flex items-center">
-                    <i class="fas fa-calendar mr-2"></i> Nov 15, 2023
-                </span>
-                <span class="flex items-center">
-                    <i class="fas fa-clock mr-2"></i> 8 min read
-                </span>
-                <span class="flex items-center">
-                    <i class="fas fa-folder mr-2"></i> Strategy
-                </span>
+              <div class="flex items-center gap-4">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=48&h=48&fit=crop&crop=face" 
+                     alt="Kim Deepsyt" 
+                     class="w-12 h-12 rounded-full object-cover">
+                <div>
+                    <p class="font-medium">Kim Deepsyt</p>
+                    <p class="text-sm text-gray-400">Course Launch Strategist</p>
+              </div>
             </div>
+        </div>
         </div>
     </section>
 
     <!-- Article Content -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-black">
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
-            <div class="flex flex-col lg:flex-row gap-12">
-                <!-- Table of Contents (Sticky) -->
-                <aside class="lg:w-64 lg:sticky lg:top-24 h-fit">
-                    <h3 class="text-lg font-bold mb-4 text-green-500">Table of Contents</h3>
-                    <nav class="space-y-2">
-                        <a href="#the-paradox" class="toc-link block text-gray-400 hover:text-green-400">The Paradox of Perfect</a>
-                        <a href="#speed-case-study" class="toc-link block text-gray-400 hover:text-green-400">Speed Case Study: $50K in 14 Days</a>
-                        <a href="#mvp-framework" class="toc-link block text-gray-400 hover:text-green-400">The MVP Framework</a>
-                        <a href="#common-traps" class="toc-link block text-gray-400 hover:text-green-400">Common Perfection Traps</a>
-                        <a href="#action-steps" class="toc-link block text-gray-400 hover:text-green-400">Your 7-Day Launch Plan</a>
-                    </nav>
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <!-- Table of Contents -->
+                <aside class="hidden lg:block lg:col-span-3">
+                    <div class="sticky top-24">
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Table of Contents</h3>
+                        <nav class="space-y-3">
+                            <a href="#the-paradox" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The Paradox of Perfect</a>
+                            <a href="#speed-case-study" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Speed Case Study</a>
+                            <a href="#mvp-framework" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">The MVP Framework</a>
+                            <a href="#common-traps" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">Common Perfection Traps</a>
+                            <a href="#action-steps" class="toc-link block text-sm text-gray-400 hover:text-green-400 pl-4 py-1">7-Day Launch Plan</a>
+                        </nav>
+                    </div>
                 </aside>
 
                 <!-- Main Content -->
-                <article class="flex-1">
+                <article class="lg:col-span-9">
                     <div class="prose prose-invert max-w-none">
-                        <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        <p class="text-lg leading-relaxed mb-6">
                             I recently worked with a creator who spent 18 months perfecting his course. 18 months. By the time he launched, the market had shifted, his competitors had moved in, and his "perfect" course was already outdated. He made $2,847 total.
                         </p>
 
-                        <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        <p class="text-lg leading-relaxed mb-6">
                             Compare that to another client who used our <strong>Turn Key package</strong> and launched in 7 days. She made $52,000 in her first 14 days. The difference? Speed.
                         </p>
 
-                        <h2 id="the-paradox" class="text-3xl font-bold mb-6 mt-12">The Paradox of Perfect</h2>
-                        
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Here's what most creators don't understand: <strong>Your customers don't want perfect. They want progress.</strong> They want to see someone who's just a few steps ahead of them, not someone who appears to have it all figured out.
-                        </p>
+                        <h2 id="the-paradox" class="text-3xl font-bold mb-4 mt-12 gradient-text">The Paradox of Perfect</h2>
+                        <p class="mb-6">Here's what most creators don't understand: <strong>Your customers don't want perfect. They want progress.</strong> They want to see someone who's just a few steps ahead of them, not someone who appears to have it all figured out.</p>
 
-                        <div class="highlight-box">
-                            <h4 class="text-green-500 font-bold mb-2">The 80/20 Rule Applied to Launch</h4>
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">Key Insight</h3>
                             <p class="text-gray-300">80% of your results come from 20% of your efforts. Identify that critical 20% and launch with that. Everything else is just procrastination disguised as improvement.</p>
                         </div>
 
-                        <h2 id="speed-case-study" class="text-3xl font-bold mb-6 mt-12">Speed Case Study: $50K in 14 Days</h2>
+                        <h2 id="speed-case-study" class="text-3xl font-bold mb-4 mt-12 gradient-text">Speed Case Study: $50K in 14 Days</h2>
+                        <p class="mb-6">Meet Jessica, a fitness coach who wanted to launch a course on prenatal fitness. Here's her exact timeline:</p>
 
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Meet Jessica, a fitness coach who wanted to launch a course on prenatal fitness. Here's her exact timeline:
-                        </p>
-
-                        <ul class="text-gray-300 mb-6 space-y-2">
+                        <ul class="list-disc list-inside space-y-3 mb-8">
                             <li><strong>Day 1:</strong> Validated demand with a simple Instagram poll (1,200 responses)</li>
                             <li><strong>Day 2-3:</strong> Created outline using our proven template</li>
                             <li><strong>Day 4-6:</strong> Recorded 8 core modules (iPhone + natural light)</li>
@@ -236,19 +216,12 @@
                             <li><strong>Day 8-14:</strong> $52,000 in sales, 347 students enrolled</li>
                         </ul>
 
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Jessica's course wasn't perfect. The audio had some echo. The lighting wasn't studio-quality. But women were getting value from day one. She's since improved the course based on real student feedback.
-                        </p>
-
-                        <h2 id="mvp-framework" class="text-3xl font-bold mb-6 mt-12">The MVP Framework for Course Creators</h2>
-
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Here's the exact framework we use with <strong>Xstream Flex</strong> clients:
-                        </p>
+                        <h2 id="mvp-framework" class="text-3xl font-bold mb-4 mt-12 gradient-text">The MVP Framework for Course Creators</h2>
+                        <p class="mb-6">Here's the exact framework we use with <strong>Xstream Flex</strong> clients:</p>
 
                         <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
-                            <h4 class="text-green-500 font-bold mb-4">The 4-Pillar MVP Course</h4>
-                            <ol class="text-gray-300 space-y-3">
+                            <h3 class="text-green-500 font-bold mb-4">The 4-Pillar MVP Course</h3>
+                            <ol class="space-y-3">
                                 <li><strong>1. Quick Win:</strong> One specific problem solved in the first 30 minutes</li>
                                 <li><strong>2. Framework:</strong> Your unique methodology (3-5 steps max)</li>
                                 <li><strong>3. Case Study:</strong> One detailed transformation story</li>
@@ -256,157 +229,103 @@
                             </ol>
                         </div>
 
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            That's it. You don't need 47 modules, 200 worksheets, or 30 hours of content. You need one clear transformation delivered quickly.
-                        </p>
-
-                        <h2 id="common-traps" class="text-3xl font-bold mb-6 mt-12">Common Perfection Traps to Avoid</h2>
-
-                        <div class="grid md:grid-cols-2 gap-6 mb-8">
-                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
-                                <h4 class="text-red-500 font-bold mb-2">❌ The Equipment Trap</h4>
+                        <h2 id="common-traps" class="text-3xl font-bold mb-4 mt-12 gradient-text">Common Perfection Traps to Avoid</h2>
+                        <div class="grid md:grid-cols-2 gap-6 my-8">
+                            <div class="bg-gray-900 p-6 rounded-lg border border-red-500/30">
+                                <h3 class="text-red-500 font-bold mb-2">❌ The Equipment Trap</h3>
                                 <p class="text-gray-300 text-sm">"I'll launch when I get a better camera..." No. Your iPhone from 2019 is fine.</p>
                             </div>
-                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
-                                <h4 class="text-red-500 font-bold mb-2">❌ The Content Trap</h4>
+                            <div class="bg-gray-900 p-6 rounded-lg border border-red-500/30">
+                                <h3 class="text-red-500 font-bold mb-2">❌ The Content Trap</h3>
                                 <p class="text-gray-300 text-sm">"I need to add more bonuses..." No. Launch with 80% and add based on feedback.</p>
-                            </div>
-                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
-                                <h4 class="text-red-500 font-bold mb-2">❌ The Design Trap</h4>
-                                <p class="text-gray-300 text-sm">"My landing page isn't perfect..." Use our templates. They convert.</p>
-                            </div>
-                            <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
-                                <h4 class="text-red-500 font-bold mb-2">❌ The Comparison Trap</h4>
-                                <p class="text-gray-300 text-sm">"But [competitor] has more..." They also have less hair and more stress.</p>
                             </div>
                         </div>
 
-                        <h2 id="action-steps" class="text-3xl font-bold mb-6 mt-12">Your 7-Day Launch Plan</h2>
-
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            Ready to launch fast? Here's your exact playbook:
-                        </p>
-
-                        <pre><code>Day 1: Define your promise (one clear outcome)
+                        <h2 id="action-steps" class="text-3xl font-bold mb-4 mt-12 gradient-text">Your 7-Day Launch Plan</h2>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-md my-6 text-sm overflow-x-auto">Day 1: Define your promise (one clear outcome)
 Day 2: Outline your 4-pillar framework
 Day 3: Record core content (60-90 minutes)
 Day 4: Create worksheets/templates
 Day 5: Set up sales page (use our template)
 Day 6: Email sequence (3 emails)
-Day 7: LAUNCH!</code></pre>
+Day 7: LAUNCH!</pre>
 
-                        <div class="highlight-box mt-8">
-                            <h4 class="text-green-500 font-bold mb-2">Pro Tip: The 24-Hour Rule</h4>
+                        <div class="highlight-box p-6 rounded-lg my-8">
+                            <h3 class="text-xl font-bold mb-3 text-green-400">Pro Tip: The 24-Hour Rule</h3>
                             <p class="text-gray-300">If you can't complete any single step in 24 hours, it's too complex. Simplify. Your future self will thank you.</p>
                         </div>
+                    </div>
 
-                        <p class="text-gray-300 mb-6 leading-relaxed">
-                            The truth? <strong>Speed wins.</strong> Every day you spend perfecting is a day your customers don't get help. Every week you delay is a week your competitors gain ground.
-                        </p>
-
-                        <p class="text-gray-300 mb-8 leading-relaxed">
-                            Stop waiting for perfect. Start creating progress. Your customers are waiting.
-                        </p>
-
-                        <!-- CTA Section -->
-                        <div class="bg-gradient-to-r from-green-500 to-green-600 text-black rounded-lg p-8 mt-12">
-                            <h3 class="text-2xl font-bold mb-4">Ready to Launch in 7 Days?</h3>
-                            <p class="mb-6">Our Turn Key package includes everything you need to launch fast: proven templates, tech setup, and a launch sequence that converts.</p>
-                            <a href="/#packages" class="bg-black text-green-500 px-6 py-3 rounded-md font-medium hover:bg-gray-900 transition duration-300 inline-flex items-center">
-                                See Turn Key Package <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
+                    <!-- Share Section -->
+                    <div class="border-t border-b border-gray-800 py-6 my-8">
+                        <p class="text-sm text-gray-400 mb-4">Found this helpful? Share it:</p>
+                        <div class="flex gap-3">
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-twitter mr-2"></i>Tweet
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                            </button>
+                            <button class="share-button border border-gray-700 px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-link mr-2"></i>Copy Link
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Author Bio -->
-                    <div class="border-t border-gray-800 mt-12 pt-8">
-                        <div class="flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-700 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user text-black text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-bold">Mike Chen</h4>
-                                <p class="text-gray-400 text-sm">Founder, Xstream Flex</p>
-                                <p class="text-gray-400 text-sm mt-1">Helping creators launch faster and profit sooner.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Share Article -->
-                    <div class="border-t border-gray-800 mt-8 pt-8">
-                        <h4 class="text-sm font-medium text-gray-400 mb-4">Share this article:</h4>
-                        <div class="flex space-x-4">
-                            <button class="share-button text-gray-400 hover:text-green-500">
-                                <i class="fab fa-twitter text-xl"></i>
-                            </button>
-                            <button class="share-button text-gray-400 hover:text-green-500">
-                                <i class="fab fa-facebook text-xl"></i>
-                            </button>
-                            <button class="share-button text-gray-400 hover:text-green-500">
-                                <i class="fab fa-linkedin text-xl"></i>
-                            </button>
-                            <button class="share-button text-gray-400 hover:text-green-500">
-                                <i class="fas fa-link text-xl"></i>
-                            </button>
-                        </div>
+                    <!-- Next Article -->
+                    <div class="mt-12">
+                        <h3 class="text-xl font-bold mb-4">Next Article</h3>
+                        <a href="/blog/tool-fatigue-real" class="block bg-gray-900 p-6 rounded-lg hover:border-green-500 border border-transparent transition-all">
+                            <h4 class="text-lg font-bold mb-2">Tool Fatigue is Real</h4>
+                            <p class="text-gray-400">The average creator tries 7 different platforms before finding one that actually works. Here's how to skip the trial-and-error phase...</p>
+                            <span class="text-sm text-green-500 mt-3 inline-block">Read next →</span>
+                        </a>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Related Articles -->
-    <section class="py-20 bg-gray-900">
+    <!-- Related Posts -->
+    <section class="py-16 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-12 text-center">Related Articles</h2>
+            <h2 class="text-3xl font-bold mb-8">Related Articles</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800">
-                    <div class="h-48 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
-                        <i class="fas fa-tools text-6xl text-black opacity-50"></i>
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                        <i class="fas fa-tools text-5xl text-black opacity-50"></i>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-green-500 text-sm font-medium">Tools</span>
-                            <span class="text-gray-500 text-sm">4 min read</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 leading-tight">Tool Fatigue is Real</h3>
-                        <p class="text-gray-400 mb-4">The average creator tries 7 different platforms before finding one that works...</p>
-                        <a href="#post-2" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <span class="text-green-500 text-sm">Tools</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">Tool Fatigue is Real</h3>
+                        <a href="/blog/toolfat.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </article>
 
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800">
-                    <div class="h-48 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-6xl text-black opacity-50"></i>
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-5xl text-black opacity-50"></i>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-green-500 text-sm font-medium">Case Study</span>
-                            <span class="text-gray-500 text-sm">5 min read</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 leading-tight">How Sarah Made $10K in 30 Days</h3>
-                        <p class="text-gray-400 mb-4">Sarah had never sold an online course before. Using Xstream Flex's Turn Key package...</p>
-                        <a href="#post-3" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <span class="text-green-500 text-sm">Case Study</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">How Sarah Made $10K in 30 Days</h3>
+                        <a href="/blog/sarah10k.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </article>
 
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800">
-                    <div class="h-48 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
-                        <i class="fas fa-envelope text-6xl text-black opacity-50"></i>
+                <article class="blog-card bg-black rounded-lg overflow-hidden">
+                    <div class="h-40 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
+                        <i class="fas fa-envelope text-5xl text-black opacity-50"></i>
                     </div>
                     <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-green-500 text-sm font-medium">Strategy</span>
-                            <span class="text-gray-500 text-sm">6 min read</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 leading-tight">The 5-Email Sequence That Converts</h3>
-                        <p class="text-gray-400 mb-4">Stop overthinking your email marketing. This proven sequence has generated over $1M...</p>
-                        <a href="#post-4" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
-                            Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <span class="text-green-500 text-sm">Strategy</span>
+                        <h3 class="text-lg font-bold mt-2 mb-3">The 5-Email Sequence That Converts</h3>
+                        <a href="/blog/5email.html" class="text-green-500 hover:text-green-400 font-medium text-sm inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </article>
@@ -414,7 +333,7 @@ Day 7: LAUNCH!</code></pre>
         </div>
     </section>
 
-    <!-- Newsletter Section -->
+    <!-- Newsletter -->
     <section class="py-20 bg-black">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
@@ -432,19 +351,19 @@ Day 7: LAUNCH!</code></pre>
     <section id="legal" class="py-12 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Privacy Policy</h3>
                     <p class="text-gray-400 mb-4">We respect your data and privacy. Learn how we collect, use, and protect your information.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../privacy.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Privacy Policy <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                <div class="bg-black p-6 rounded-lg border border-gray-800">
                     <h3 class="text-xl font-bold mb-4">Terms of Use</h3>
                     <p class="text-gray-400 mb-4">Understand the terms and conditions for using Xstream Flex services.</p>
-                    <button class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                    <a href="../terms.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
                         View Terms of Use <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -455,18 +374,10 @@ Day 7: LAUNCH!</code></pre>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center md:order-2 space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-green-500">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-green-500"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <div class="mt-8 md:mt-0 md:order-1">
                     <p class="text-center text-base text-gray-400">
@@ -478,68 +389,65 @@ Day 7: LAUNCH!</code></pre>
     </footer>
 
     <script>
-        // Progress bar
-        window.addEventListener('scroll', function() {
+        // ---------- Re-using JS from first snippet ----------
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Reading progress bar
+        window.addEventListener('scroll', function () {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progress-bar').style.width = scrolled + '%';
         });
 
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
+        // Table of contents active link
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('[id]');
 
-        // Smooth scrolling for TOC links
-        document.querySelectorAll('.toc-link').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        window.addEventListener('scroll', function () {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
                 }
             });
-        });
-
-        // Active TOC link highlighting
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('h2[id]');
-            const scrollPos = window.scrollY + 100;
-
-            sections.forEach(section => {
-                const top = section.offsetTop;
-                const bottom = top + section.offsetHeight;
-                const id = section.getAttribute('id');
-                const link = document.querySelector(`.toc-link[href="#${id}"]`);
-
-                if (scrollPos >= top && scrollPos <= bottom) {
-                    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
-                    if (link) link.classList.add('active');
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
                 }
             });
         });
 
         // Share buttons
         document.querySelectorAll('.share-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const url = encodeURIComponent(window.location.href);
-                const title = encodeURIComponent(document.title);
-                
+            button.addEventListener('click', function () {
+                const url = window.location.href;
+                const title = document.querySelector('h1').textContent;
                 if (this.querySelector('.fa-twitter')) {
-                    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank');
-                } else if (this.querySelector('.fa-facebook')) {
-                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
                 } else if (this.querySelector('.fa-linkedin')) {
-                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`);
                 } else if (this.querySelector('.fa-link')) {
-                    navigator.clipboard.writeText(window.location.href);
-                    alert('Link copied to clipboard!');
+                    navigator.clipboard.writeText(url);
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                    setTimeout(() => (this.innerHTML = '<i class="fas fa-link mr-2"></i>Copy Link'), 2000);
+                }
+            });
+        });
+
+        // Smooth scroll TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
