@@ -35,12 +35,32 @@
         .blog-card {
             transition: all 0.3s ease;
             border: 1px solid #333;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
         .blog-card:hover {
             transform: translateY(-5px);
             border-color: #00ff00;
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.1);
+        }
+        
+        .blog-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(0, 255, 0, 0.03) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .blog-card:hover::after {
+            opacity: 1;
         }
         
         .feature-icon {
@@ -63,11 +83,43 @@
             background-color: #00ff00;
             color: #000;
         }
+        
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ff00;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
- <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
+    <nav class="bg-black border-b border-gray-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -100,7 +152,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -117,7 +169,7 @@
                 </div>
             </div>
         </div>
-    </nav>   
+    </nav>
 
     <!-- Blog Header -->
     <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-gray-900">
@@ -139,14 +191,14 @@
                 <div class="mb-4 md:mb-0">
                     <span class="text-gray-400 mr-4">Filter by:</span>
                     <div class="inline-flex flex-wrap gap-2">
-                        <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="all">All</span>
+                        <span class="tag bg-green-500 text-black px-4 py-2 rounded-full text-sm font-medium" data-filter="all">All</span>
                         <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="strategy">Strategy</span>
                         <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="tools">Tools</span>
                         <span class="tag bg-gray-800 text-white px-4 py-2 rounded-full text-sm" data-filter="case-study">Case Studies</span>
                     </div>
                 </div>
                 <div class="relative">
-                    <input type="text" id="search-input" placeholder="Search articles..." 
+                    <input type="text" id="search-input" placeholder="Search articles..."
                            class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 w-64">
                     <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                 </div>
@@ -160,11 +212,11 @@
             <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Post 1: The Launch Speed Advantage -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy" data-url="blog/launchspeed.html">
                     <div class="h-48 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
                         <i class="fas fa-rocket text-6xl text-black opacity-50"></i>
                     </div>
-                    <div a href="blog/launchspeed.html" class="p-6">
+                    <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
                             <span class="text-green-500 text-sm font-medium">Strategy</span>
                             <span class="text-gray-500 text-sm">3 min read</span>
@@ -173,15 +225,15 @@
                         <p class="text-gray-400 mb-4">Most creators get stuck in "perfect mode" - endlessly tweaking their course or product before launch. But speed to market is your greatest competitive advantage...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Nov 15, 2023</span>
-                            <class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Post 2: Tool Fatigue is Real -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools" data-url="blog/toolfat.html">
                     <div class="h-48 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
                         <i class="fas fa-tools text-6xl text-black opacity-50"></i>
                     </div>
@@ -194,15 +246,15 @@
                         <p class="text-gray-400 mb-4">The average creator tries 7 different platforms before finding one that works. Xstream Flex combines everything you need in one place, eliminating the integration headache...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Nov 12, 2023</span>
-                            <a href="blog/toolfat.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Post 3: First $10K -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="case-study">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="case-study" data-url="blog/sarah10k.html">
                     <div class="h-48 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
                         <i class="fas fa-chart-line text-6xl text-black opacity-50"></i>
                     </div>
@@ -215,15 +267,15 @@
                         <p class="text-gray-400 mb-4">Sarah had never sold an online course before. Using Xstream Flex's Turn Key package, she went from idea to $10,000 in revenue in just 30 days. Here's exactly how...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Nov 8, 2023</span>
-                            <a href="blog/sarah10k.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Post 4: Email Sequences -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy" data-url="blog/5email.html">
                     <div class="h-48 bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center">
                         <i class="fas fa-envelope text-6xl text-black opacity-50"></i>
                     </div>
@@ -236,15 +288,15 @@
                         <p class="text-gray-400 mb-4">Stop overthinking your email marketing. This proven 5-email sequence has generated over $1M in course sales across different niches...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Nov 3, 2023</span>
-                            <a href="blog/5email.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Post 5: Course Pricing -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="strategy" data-url="blog/priceright.html">
                     <div class="h-48 bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center">
                         <i class="fas fa-dollar-sign text-6xl text-black opacity-50"></i>
                     </div>
@@ -257,15 +309,15 @@
                         <p class="text-gray-400 mb-4">Most creators underprice their courses by 50-70%. Learn the psychology behind pricing and the exact formula to maximize revenue...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Oct 28, 2023</span>
-                            <a href="blog/priceright.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
 
                 <!-- Post 6: Tech Stack -->
-                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools">
+                <article class="blog-card bg-gray-900 rounded-lg overflow-hidden border border-gray-800" data-category="tools" data-url="blog/techstack.html">
                     <div class="h-48 bg-gradient-to-r from-green-700 to-green-900 flex items-center justify-center">
                         <i class="fas fa-cogs text-6xl text-black opacity-50"></i>
                     </div>
@@ -278,13 +330,12 @@
                         <p class="text-gray-400 mb-4">Don't build your course business on shaky ground. Here are the 7 tools you actually need (and the 15 you can ignore)...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-500 text-sm">Oct 20, 2023</span>
-                            <a href="blog/techstack.html" class="text-green-500 hover:text-green-400 font-medium inline-flex items-center">
+                            <span class="text-green-500 font-medium inline-flex items-center">
                                 Read More <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </article>
-
             </div>
 
             <!-- Load More Button -->
@@ -302,7 +353,7 @@
             <h2 class="text-3xl font-bold mb-4">Stay in the Loop</h2>
             <p class="text-gray-400 mb-8">Get weekly insights on launching faster and growing smarter. No spam, just value.</p>
             <form class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" 
+                <input type="email" placeholder="Enter your email"
                        class="flex-1 bg-black border border-gray-700 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-black px-6 py-3 rounded-md font-medium transition duration-300">
                     Subscribe
@@ -371,14 +422,16 @@
         const tags = document.querySelectorAll('.tag');
         const posts = document.querySelectorAll('.blog-card');
         const searchInput = document.getElementById('search-input');
-        
+
         tags.forEach(tag => {
             tag.addEventListener('click', function() {
                 const filter = this.getAttribute('data-filter');
                 
                 // Update active tag
-                tags.forEach(t => t.classList.remove('bg-green-500', 'text-black'));
-                tags.forEach(t => t.classList.add('bg-gray-800', 'text-white'));
+                tags.forEach(t => {
+                    t.classList.remove('bg-green-500', 'text-black');
+                    t.classList.add('bg-gray-800', 'text-white');
+                });
                 this.classList.remove('bg-gray-800', 'text-white');
                 this.classList.add('bg-green-500', 'text-black');
                 
@@ -409,13 +462,46 @@
             });
         });
 
+        // Make entire cards clickable
+        posts.forEach(post => {
+            post.addEventListener('click', function(e) {
+                const url = this.getAttribute('data-url');
+                if (url) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    this.appendChild(ripple);
+                    
+                    // Navigate after ripple animation
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 300);
+                }
+            });
+            
+            // Add hover effect for cursor
+            post.style.cursor = 'pointer';
+        });
+
         // Load more functionality (placeholder)
         document.getElementById('load-more').addEventListener('click', function() {
-            this.textContent = 'Loading...';
+            const originalText = this.textContent;
+            this.innerHTML = '<span class="spinner mr-2"></span>Loading...';
+            
             setTimeout(() => {
-                this.textContent = 'Load More Articles';
+                this.textContent = originalText;
                 alert('More articles coming soon! This is where you would dynamically load additional blog posts.');
-            }, 1000);
+            }, 1500);
         });
 
         // Smooth scrolling
@@ -436,6 +522,14 @@
                     });
                 }
             });
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                // Allow tab navigation
+                return;
+            }
         });
     </script>
 </body>
